@@ -9,14 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <link rel="manifest" href="/static/manifest.json">
+   {% load static %}
+
+    <link rel="manifest" href="{% static 'manifest.json' %}">
     <meta name="theme-color" content="#0d0d12">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="SpendWise">
-    <link rel="apple-touch-icon" href="/static/images/icon.jpg">
 
+    <link rel="apple-touch-icon" href="{% static 'images/icon.png' %}">
+    <link rel="icon" href="{% static 'images/icon.png' %}">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
