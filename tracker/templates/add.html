@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg:        #0c0c0e; --surface:   #141417; --surface2:  #1c1c21;
+            --border:    rgba(255,255,255,0.07); --border2:   rgba(255,255,255,0.14);
+            --gold:      #c9a84c; --gold-dim:  rgba(201,168,76,0.15); --gold-glow: rgba(201,168,76,0.08);
+            --text:      #f0ece3; --text-muted:#8a8680; --text-dim:  #55534e;
+            --danger:    #d06b5a; --radius:    14px;
+        }
+        body {
+            min-height: 100vh; background: var(--bg);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'DM Sans', sans-serif; color: var(--text);
+            padding: 2rem 1rem; position: relative; overflow-x: hidden;
+        }
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 20% 10%, rgba(201,168,76,0.05) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 60% at 80% 80%, rgba(100,80,200,0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        body::after {
+            content: ''; position: fixed; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 48px 48px; pointer-events: none;
+        }
+        .page-wrapper {
+            width: 100%; max-width: 500px; position: relative; z-index: 1;
+            animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .form-header { margin-bottom: 2.5rem; }
+        .eyebrow {
+            font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--gold); font-weight: 500; margin-bottom: 0.6rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); opacity: 0.6; }
+        .form-header h1 {
+            font-family: 'Cormorant Garamond', serif; font-size: 2.8rem;
+            font-weight: 300; letter-spacing: -0.01em; line-height: 1.1; color: var(--text);
+        }
+        .form-header h1 em { font-style: italic; color: var(--gold); }
+        .form-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 20px; padding: 2rem; position: relative; overflow: hidden;
+        }
+        .form-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+        }
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .field { position: relative; margin-bottom: 1.25rem; }
+        .field label {
+            display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--text-muted); font-weight: 500; margin-bottom: 0.5rem; transition: color 0.2s;
+        }
+        .field:focus-within label { color: var(--gold); }
+        .field.amount-field .input-wrap { position: relative; }
+        .field.amount-field .currency {
+            position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+            font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+            color: var(--text-muted); pointer-events: none; transition: color 0.2s;
+        }
+        .field.amount-field:focus-within .currency { color: var(--gold); }
+        .field.amount-field input { padding-left: 38px !important; font-family: 'Cormorant Garamond', serif !important; font-size: 1.75rem !important; }
+        input, select, textarea {
+            width: 100%; background: var(--surface2); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 13px 16px;
+            font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+            outline: none; transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+            -webkit-appearance: none; appearance: none;
+        }
+        input::placeholder, textarea::placeholder { color: var(--text-dim); }
+        input:focus, select:focus, textarea:focus {
+            border-color: rgba(201,168,76,0.5); background: #1f1f25;
+            box-shadow: 0 0 0 3px var(--gold-glow), inset 0 1px 0 rgba(255,255,255,0.03);
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.5) sepia(1) saturate(0.5); cursor: pointer; opacity: 0.5; }
+        textarea { resize: none; min-height: 100px; line-height: 1.6; }
+        .category-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.6rem; }
+        .chip {
+            font-size: 12px; font-weight: 500; letter-spacing: 0.04em; padding: 5px 13px;
+            border-radius: 100px; background: var(--surface2); border: 1px solid var(--border);
+            color: var(--text-muted); cursor: pointer; transition: all 0.18s; user-select: none;
+        }
+        .chip:hover { border-color: var(--border2); color: var(--text); }
+        .chip.active { background: var(--gold-dim); border-color: rgba(201,168,76,0.4); color: var(--gold); }
+        .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+        .btn-submit {
+            width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #c9a84c 0%, #e8c96a 50%, #c9a84c 100%);
+            background-size: 200% 200%; background-position: 100% 50%;
+            border: none; border-radius: var(--radius);
+            font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+            letter-spacing: 0.08em; text-transform: uppercase; color: #1a1408;
+            cursor: pointer; transition: background-position 0.4s, transform 0.15s, box-shadow 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .btn-submit:hover {
+            background-position: 0% 50%;
+            box-shadow: 0 8px 28px rgba(201,168,76,0.25); transform: translateY(-1px);
+        }
+        .btn-submit::after {
+            content: '→'; position: absolute; right: 1.5rem; top: 50%;
+            transform: translateY(-50%); font-size: 1rem; transition: right 0.2s;
+        }
+        .btn-submit:hover::after { right: 1.2rem; }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 1.5rem; font-size: 0.82rem; color: var(--text-muted);
+            text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s;
+        }
+        .back-link::before { content: '←'; }
+        .back-link:hover { color: var(--text); }
+
+        .field:nth-child(1) { animation: field-in 0.5s 0.12s both; }
+        .field:nth-child(2) { animation: field-in 0.5s 0.18s both; }
+        .field:nth-child(3) { animation: field-in 0.5s 0.24s both; }
+        .field-row          { animation: field-in 0.5s 0.30s both; }
+        .field.desc-field   { animation: field-in 0.5s 0.36s both; }
+        .divider            { animation: field-in 0.5s 0.42s both; }
+        .btn-submit         { animation: field-in 0.5s 0.46s both; }
+        @keyframes field-in { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+        @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } .form-header h1 { font-size: 2.2rem; } }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <div class="form-header">
+        <div class="eyebrow">Finance Tracker</div>
+        <h1>Add an <em>Expense</em></h1>
+    </div>
+
+    <div class="form-card">
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Title -->
+            <div class="field">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" placeholder="e.g. Dinner with friends, Uber to airport…">
+            </div>
+
+            <!-- Amount -->
+            <div class="field amount-field">
+                <label for="amount">Amount</label>
+                <div class="input-wrap">
+                    <span class="currency">₹</span>
+                    <input type="number" id="amount" name="amount" placeholder="0.00" step="0.01" min="0" required>
+                </div>
+            </div>
+
+            <!-- Category -->
+            <div class="field">
+                <label for="category">Category</label>
+                <input type="text" id="category" name="category" placeholder="e.g. Travel, Food, Bills…" required>
+                <div class="category-chips" id="chips">
+                    <span class="chip" onclick="selectChip(this,'Food')">Food</span>
+                    <span class="chip" onclick="selectChip(this,'Travel')">Travel</span>
+                    <span class="chip" onclick="selectChip(this,'Bills')">Bills</span>
+                    <span class="chip" onclick="selectChip(this,'Health')">Health</span>
+                    <span class="chip" onclick="selectChip(this,'Shopping')">Shopping</span>
+                    <span class="chip" onclick="selectChip(this,'Other')">Other</span>
+                </div>
+            </div>
+
+            <!-- Date + Reference -->
+            <div class="field-row">
+                <div class="field">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="field">
+                    <label for="ref">Reference (optional)</label>
+                    <input type="text" id="ref" name="reference" placeholder="Invoice #, receipt…">
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="field desc-field">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Add a note about this expense…"></textarea>
+            </div>
+
+            <div class="divider"></div>
+            <button type="submit" class="btn-submit">Record Expense</button>
+        </form>
+    </div>
+
+    <a href="/" class="back-link">Back to dashboard</a>
+</div>
+
+<script>
+    document.getElementById('date').valueAsDate = new Date();
+
+    function selectChip(el, val) {
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        document.getElementById('category').value = val;
+    }
+
+    document.getElementById('category').addEventListener('input', function() {
+        const v = this.value.trim().toLowerCase();
+        document.querySelectorAll('.chip').forEach(c => {
+            c.classList.toggle('active', c.textContent.toLowerCase() === v);
+        });
+    });
+</script>
+</body>
+</html>

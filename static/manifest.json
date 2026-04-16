@@ -1,0 +1,15 @@
+{
+  "name": "SpendWise",
+  "short_name": "SpendWise",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0c0e",
+  "theme_color": "#c9a84c",
+  "icons": [
+    {
+      "src": "/static/icon.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    }
+  ]
+}
