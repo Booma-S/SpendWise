@@ -85,10 +85,9 @@
 
         /* ── TOP NAV ── */
         .topnav {
-            display: flex; align-items: flex-start; justify-content: space-between;
-            margin-bottom: 3rem;
-            animation: rise 0.6s 0.05s both;
-            flex-wrap: wrap;
+            display: flex;
+            flex-direction: column;   /* stack everything vertically */
+            align-items: flex-start;  /* align left */
             gap: 10px;
         }
         .brand { display: flex; flex-direction: column; }
@@ -100,7 +99,7 @@
         .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; }
         .brand-name em { font-style: italic; color: var(--gold); }
 
-        .nav-actions { display: flex; gap: 10px; align-items:center; margin-top: 4px; }
+        .nav-actions { display: flex; gap: 10px; align-items:center; margin-top: 4px; flex-shrink: 0;  }
 
         .btn-add {
             display: inline-flex; align-items: center; gap: 8px;
