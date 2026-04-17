@@ -1,46 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* 🌑 BACKGROUND */
 body {
-    background: #0d0d12;
+    margin: 0;
+    background: radial-gradient(circle at 20% 20%, #1a1a20 0%, #0d0d12 40%, #08080a 100%);
     font-family: 'DM Sans', sans-serif;
-    color: white;
+    color: #e8e0d0;
 }
 
+/* CENTERING */
 .auth-container {
+    min-height: 100vh;
     display: flex;
-    height: 100vh;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
+/* 🔥 MAIN CARD */
 .auth-card {
-    background: #15151c;
-    padding: 40px;
-    border-radius: 20px;
-    width: 320px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    width: 90%;
+    max-width: 380px;
+    padding: 40px 30px;
+    border-radius: 24px;
+
+    background: linear-gradient(145deg, #141418, #0f0f13);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+
+    box-shadow:
+        0 0 40px rgba(0,0,0,0.6),
+        inset 0 0 20px rgba(201,168,76,0.03);
+
+    backdrop-filter: blur(20px);
 }
 
+/* 🏷 TITLE */
+.auth-card h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.auth-card h1 em {
+    color: #c9a84c;
+    font-style: italic;
+}
+
+/* ✨ INPUT FIELDS */
 input {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     margin: 10px 0;
-    border-radius: 10px;
-    border: none;
-    background: #222;
-    color: white;
+
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.05);
+
+    background: #0f0f14;
+    color: #e8e0d0;
+
+    font-size: 15px;
+    outline: none;
+
+    transition: all 0.3s ease;
 }
 
+/* INPUT FOCUS */
+input:focus {
+    border: 1px solid #c9a84c;
+    box-shadow: 0 0 8px rgba(201,168,76,0.3);
+}
+
+/* 🔘 BUTTON */
 button {
     width: 100%;
-    padding: 12px;
-    background: #c9a84c;
+    padding: 14px;
+    margin-top: 15px;
+
     border: none;
-    border-radius: 10px;
-    margin-top: 10px;
+    border-radius: 14px;
+
+    background: linear-gradient(135deg, #c9a84c, #e8c76a);
+    color: #0d0d12;
+
+    font-weight: 500;
+    font-size: 15px;
+
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
+/* BUTTON HOVER */
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(201,168,76,0.4);
+}
+
+/* OPTIONS (REMEMBER + FORGOT) */
 .options {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 12px;
+    margin-top: 5px;
+}
+
+.options label {
+    color: #8a8070;
+}
+
+.options a {
+    color: #c9a84c;
+    text-decoration: none;
+}
+
+.options a:hover {
+    text-decoration: underline;
+}
+
+/* 🔗 FOOTER TEXT */
+.auth-card p {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 18px;
+    color: #8a8070;
+}
+
+.auth-card a {
+    color: #c9a84c;
+    text-decoration: none;
+}
+
+.auth-card a:hover {
+    text-decoration: underline;
 }
