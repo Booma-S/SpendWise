@@ -1,29 +1,14 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpendWise</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SpendWise — Elegant Finance Dashboard</title>
+    <!-- Google Fonts + Chart.js -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-   {% load static %}
-    <link rel="manifest" href="{% static 'manifest.json' %}">
-    <meta name="theme-color" content="#0d0d12">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="SpendWise">
-
-    <link rel="apple-touch-icon" href="{% static 'images/icon.jpg' %}">
-    <link rel="icon" href="{% static 'images/icon.jpg' %}">
-
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
-    
- <style>
+    <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
@@ -76,39 +61,81 @@
             background-size: 52px 52px;
         }
 
-        /* ── SHELL ── */
         .shell {
             position: relative; z-index: 1;
             max-width: 1080px; margin: 0 auto;
-            padding: 3rem 2rem 5rem;
+            padding: 2rem 2rem 5rem;
         }
 
-        /* ── TOP NAV ── */
+        /* ========== FIXED TOP NAVIGATION — PERFECT ALIGNMENT ========== */
         .topnav {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
             animation: rise 0.6s 0.05s both;
         }
-        .brand { display: flex; flex-direction: column; }
-        .brand-eyebrow {
-            font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-            color: var(--gold); display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
-        }
-        .brand-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--gold); opacity: 0.6; }
-        .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; }
-        .brand-name em { font-style: italic; color: var(--gold); }
 
-        .nav-actions { display: flex; gap: 10px; align-items: center; }
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .brand-eyebrow {
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-eyebrow::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.6;
+        }
+        .brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+        .brand-name em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
 
         .btn-add {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 11px 22px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 24px;
             background: linear-gradient(135deg, #c9a84c 0%, #e8c96a 50%, #c9a84c 100%);
-            background-size: 200% 200%; background-position: 100% 50%;
-            border: none; border-radius: 100px;
-            font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500;
-            letter-spacing: 0.09em; text-transform: uppercase; color: #1a1408;
-            cursor: pointer; text-decoration: none;
+            background-size: 200% 200%;
+            background-position: 100% 50%;
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: #1a1408;
+            cursor: pointer;
+            text-decoration: none;
             transition: background-position 0.4s, box-shadow 0.3s, transform 0.15s;
         }
         .btn-add:hover {
@@ -118,419 +145,238 @@
         }
 
         .btn-export {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 10px 18px;
-            background: var(--surface2); border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
             border-radius: 100px;
-            font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500;
-            letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted);
-            cursor: pointer; text-decoration: none;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            cursor: pointer;
+            text-decoration: none;
             transition: border-color 0.2s, color 0.2s;
         }
-        .btn-export:hover { border-color: var(--border2); color: var(--text); }
+        .btn-export:hover {
+            border-color: var(--border2);
+            color: var(--text);
+        }
 
-        /* ── SEARCH / FILTER BAR ── */
+        /* Search + filter row */
         .search-section {
             margin-bottom: 1.5rem;
             animation: rise 0.6s 0.08s both;
         }
         .search-bar {
-            display: flex; align-items: center; gap: 14px;
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 0.75rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 0.75rem 1.4rem;
             margin-bottom: 0.75rem;
             transition: border-color 0.25s;
         }
-        .search-bar:focus-within { border-color: rgba(201,168,76,0.35); }
-        .search-icon { color: var(--text-dim); font-size: 14px; flex-shrink: 0; }
+        .search-bar:focus-within {
+            border-color: rgba(201,168,76,0.45);
+        }
+        .search-icon {
+            color: var(--text-dim);
+            font-size: 14px;
+            flex-shrink: 0;
+        }
         .search-input {
-            flex: 1; background: none; border: none; outline: none;
-            font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--text);
+            flex: 1;
+            background: none;
+            border: none;
+            outline: none;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.88rem;
+            color: var(--text);
         }
-        .search-input::placeholder { color: var(--text-dim); }
+        .search-input::placeholder {
+            color: var(--text-dim);
+        }
         .search-clear {
-            background: none; border: none; color: var(--text-dim); cursor: pointer;
-            font-size: 13px; padding: 2px 6px; border-radius: 6px;
-            transition: color 0.2s; display: none;
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 13px;
+            padding: 2px 6px;
+            border-radius: 6px;
+            transition: color 0.2s;
+            display: none;
         }
-        .search-clear.visible { display: block; }
-        .search-clear:hover { color: var(--text-muted); }
-
-        .filter-chips-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .search-clear.visible {
+            display: block;
+        }
+        .filter-chips-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
         .filter-chip {
-            font-size: 11.5px; font-weight: 500; padding: 5px 14px;
-            border-radius: 100px; background: var(--surface);
-            border: 1px solid var(--border); color: var(--text-muted);
-            cursor: pointer; transition: all 0.18s; user-select: none; text-decoration: none;
+            font-size: 11.5px;
+            font-weight: 500;
+            padding: 5px 14px;
+            border-radius: 100px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.18s;
+            text-decoration: none;
+            display: inline-block;
         }
-        .filter-chip:hover { border-color: var(--border2); color: var(--text); }
         .filter-chip.active {
-            background: var(--gold-dim); border-color: rgba(201,168,76,0.4); color: var(--gold);
+            background: var(--gold-dim);
+            border-color: rgba(201,168,76,0.4);
+            color: var(--gold);
         }
 
-        /* ── STAT ROW ── */
+        /* stat row etc — keep original beauty */
         .stat-row {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 1rem; margin-bottom: 1.5rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
             animation: rise 0.6s 0.1s both;
         }
         .stat-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 1.6rem 1.8rem;
-            position: relative; overflow: hidden; transition: border-color 0.25s;
-        }
-        .stat-card:hover { border-color: var(--border2); }
-        .stat-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.35), transparent);
-        }
-        .stat-label {
-            font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--text-muted); font-weight: 500; margin-bottom: 0.6rem;
-        }
-        .stat-amount {
-            font-family: 'Cormorant Garamond', serif; font-weight: 300;
-            color: var(--text); line-height: 1;
-        }
-        .stat-card.hero .stat-amount { font-size: 3.4rem; }
-        .stat-card:not(.hero) .stat-amount { font-size: 2rem; }
-        .stat-amount span { color: var(--gold); font-size: 0.55em; vertical-align: super; margin-right: 2px; }
-        .stat-sub { font-size: 11.5px; color: var(--text-muted); margin-top: 0.5rem; }
-        .stat-badge {
-            display: inline-flex; align-items: center; gap: 4px;
-            font-size: 11px; padding: 3px 10px; border-radius: 100px; font-weight: 500;
-        }
-        .stat-badge.up   { background: var(--green-bg);  color: var(--green); }
-        .stat-badge.down { background: var(--danger-bg); color: var(--danger); }
-        .stat-badge.neutral { background: var(--surface2); color: var(--text-muted); }
-
-        .stat-card.hero .deco-ring {
-            position: absolute; right: -40px; bottom: -40px;
-            width: 160px; height: 160px; border-radius: 50%;
-            border: 1px solid rgba(201,168,76,0.1);
-        }
-        .stat-card.hero .deco-ring::after {
-            content: ''; position: absolute; inset: 20px; border-radius: 50%;
-            border: 1px solid rgba(201,168,76,0.07);
-        }
-
-        /* ── MAIN GRID ── */
-        .main-grid {
-            display: grid; grid-template-columns: 1fr 320px;
-            gap: 1rem; margin-bottom: 1rem;
-            animation: rise 0.6s 0.2s both;
-        }
-
-        /* ── EXPENSE LIST PANEL ── */
-        .panel {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); overflow: hidden; position: relative;
-        }
-        .panel::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-        }
-        .panel-header {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 1.4rem 1.6rem 1rem; border-bottom: 1px solid var(--border);
-        }
-        .panel-title {
-            font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
-            font-weight: 400; color: var(--text);
-        }
-        .panel-title em { font-style: italic; color: var(--gold); }
-        .panel-count {
-            font-size: 11px; color: var(--text-muted);
-            background: var(--surface2); border: 1px solid var(--border);
-            border-radius: 100px; padding: 3px 10px;
-        }
-
-        .expense-list { max-height: 400px; overflow-y: auto; }
-        .expense-list::-webkit-scrollbar { width: 4px; }
-        .expense-list::-webkit-scrollbar-track { background: transparent; }
-        .expense-list::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.2); border-radius: 4px; }
-
-        .expense-item {
-            display: flex; align-items: center; gap: 14px;
-            padding: 14px 1.6rem; border-bottom: 1px solid var(--border);
-            transition: background 0.2s;
-        }
-        .expense-item:last-child { border-bottom: none; }
-        .expense-item:hover { background: rgba(255,255,255,0.02); }
-
-        .expense-icon {
-            width: 36px; height: 36px; flex-shrink: 0; border-radius: 10px;
-            background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.2);
-            display: flex; align-items: center; justify-content: center; font-size: 14px;
-        }
-        .expense-info { flex: 1; min-width: 0; }
-        .expense-title {
-            font-size: 0.88rem; font-weight: 500; color: var(--text);
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-        .expense-meta { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
-        .expense-amount {
-            font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;
-            font-weight: 400; color: var(--text); white-space: nowrap;
-        }
-        .expense-actions { display: flex; gap: 6px; opacity: 0; transition: all 0.3s ease; }
-
-        .expense-item.active .expense-actions {
-            opacity: 1;
-            transform: translateX(0);
-        }   
-        .action-btn {
-            width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--border);
-            background: var(--surface2); display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: all 0.18s; text-decoration: none; font-size: 12px;
-        }
-        .action-btn.edit:hover { border-color: rgba(201,168,76,0.5); background: var(--gold-dim); }
-        .action-btn.del:hover  { border-color: rgba(192,97,79,0.5);  background: var(--danger-bg); }
-
-        /* ── SIDE STACK ── */
-        .side-stack { display: flex; flex-direction: column; gap: 1rem; }
-
-        .highlight-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 1.4rem 1.6rem;
-            position: relative; overflow: hidden;
-        }
-        .highlight-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-        }
-        .highlight-amount {
-            font-family: 'Cormorant Garamond', serif; font-size: 2.4rem;
-            font-weight: 300; color: var(--danger); line-height: 1; margin: 0.6rem 0 0.3rem;
-        }
-        .highlight-amount span { font-size: 0.5em; vertical-align: super; }
-        .highlight-title { font-size: 0.82rem; color: var(--text-muted); }
-        .flame-deco { position: absolute; right: 1.4rem; top: 1.2rem; font-size: 1.8rem; opacity: 0.18; }
-
-        /* Weekly bars */
-        .weekly-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 1.4rem 1.6rem;
-            position: relative; overflow: hidden;
-        }
-        .weekly-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-        }
-        .weekly-row {
-            display: flex; align-items: center; gap: 10px;
-            padding: 6px 0; border-bottom: 1px solid var(--border);
-        }
-        .weekly-row:last-child { border-bottom: none; }
-        .weekly-day { font-size: 11px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 28px; }
-        .weekly-bar-wrap { flex: 1; height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
-        .weekly-bar {
-            height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light));
-            border-radius: 2px; transition: width 0.8s cubic-bezier(0.22,1,0.36,1);
-        }
-        .weekly-amt {
-            font-family: 'Cormorant Garamond', serif; font-size: 0.95rem;
-            color: var(--text); min-width: 60px; text-align: right;
-        }
-
-        /* ── BUDGET RINGS SECTION ── */
-        .budget-panel {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 1.4rem 1.6rem;
-            margin-bottom: 1rem; position: relative; overflow: hidden;
-            animation: rise 0.6s 0.25s both;
-        }
-        .budget-panel::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-        }
-        .budget-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-            gap: 1rem; margin-top: 1rem;
-        }
-        .budget-item { text-align: center; }
-        .budget-ring-wrap { position: relative; width: 64px; height: 64px; margin: 0 auto 0.5rem; }
-        .budget-ring-svg { width: 64px; height: 64px; transform: rotate(-90deg); }
-        .ring-track { fill: none; stroke: var(--surface2); stroke-width: 5; }
-        .ring-fill  {
-            fill: none; stroke-width: 5; stroke-linecap: round;
-            stroke-dasharray: 163; stroke-dashoffset: 163;
-            transition: stroke-dashoffset 1.2s cubic-bezier(0.22,1,0.36,1);
-        }
-        .ring-fill.safe    { stroke: var(--gold); }
-        .ring-fill.warning { stroke: #e0a040; }
-        .ring-fill.danger  { stroke: var(--danger); }
-        .ring-pct {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-            font-size: 11px; font-weight: 600; color: var(--text);
-        }
-        .budget-cat-label { font-size: 11px; color: var(--text-muted); }
-        .budget-amounts   { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
-
-        .budget-form-row {
-            display: flex; gap: 8px; margin-top: 1rem;
-            border-top: 1px solid var(--border); padding-top: 1rem;
-        }
-        .budget-form-row select, .budget-form-row input {
-            flex: 1; background: var(--surface2); border: 1px solid var(--border);
-            border-radius: 10px; padding: 8px 12px;
-            font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--text);
-            outline: none;
-        }
-        .budget-form-row select:focus, .budget-form-row input:focus {
-            border-color: rgba(201,168,76,0.4);
-        }
-        .btn-set-budget {
-            padding: 8px 16px; background: var(--gold-dim);
-            border: 1px solid rgba(201,168,76,0.3); border-radius: 10px;
-            font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500;
-            color: var(--gold); cursor: pointer; white-space: nowrap; transition: all 0.2s;
-        }
-        .btn-set-budget:hover { background: rgba(201,168,76,0.22); }
-
-        /* ── HEATMAP ── */
-        .heatmap-panel {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 1.6rem 1.8rem;
-            margin-bottom: 1rem; position: relative; overflow: hidden;
-            animation: rise 0.6s 0.28s both;
-        }
-        .heatmap-panel::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-        }
-        .heatmap-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 1.2rem;
-        }
-        .heatmap-grid {
-            display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px;
-        }
-        .heatmap-cell {
-            aspect-ratio: 1; border-radius: 4px; background: var(--surface2);
-            cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.6rem 1.8rem;
             position: relative;
+            overflow: hidden;
+            transition: border-color 0.25s;
         }
-        .heatmap-cell:hover {
-            transform: scale(1.3); z-index: 10;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
-
-        .heatmap-tooltip {
-            background: #1c1c21;
-            color: #f0ece3;
-            border: 1px solid rgba(201,168,76,0.3);
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            z-index: 999;
-            pointer-events: none;
-        }
-        /* Tooltip */
-        .heatmap-cell::after {
-            content: attr(data-tip);
-            position: absolute; bottom: calc(100% + 6px); left: 50%;
-            transform: translateX(-50%);
-            background: var(--surface3); border: 1px solid var(--border2);
-            color: var(--text); font-size: 10px; white-space: nowrap;
-            padding: 4px 8px; border-radius: 6px; pointer-events: none;
-            opacity: 0; transition: opacity 0.15s; z-index: 20;
-        }
-        
-
-        .heatmap-legend {
-            display: flex; align-items: center; gap: 6px;
-            margin-top: 0.9rem; justify-content: flex-end;
-        }
-        .heatmap-legend span { font-size: 10px; color: var(--text-muted); }
-        .legend-cells { display: flex; gap: 3px; }
-        .legend-cell { width: 12px; height: 12px; border-radius: 2px; }
-
-        /* ── DUAL CHART ── */
-        .chart-panel {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 1.6rem 1.8rem;
-            position: relative; overflow: hidden;
-            animation: rise 0.6s 0.32s both;
-        }
-        .chart-panel::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-        }
-        .chart-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 1.4rem;
-        }
-        .chart-toggle { display: flex; gap: 4px; }
-        .chart-tab {
-            font-size: 11px; padding: 5px 13px; border-radius: 100px;
-            background: var(--surface2); border: 1px solid var(--border);
-            color: var(--text-muted); cursor: pointer; transition: all 0.18s;
-        }
-        .chart-tab.active {
-            background: var(--gold-dim); border-color: rgba(201,168,76,0.4); color: var(--gold);
-        }
-        .chart-canvas-wrap { height: 240px; display: none; }
-        .chart-canvas-wrap.visible { display: block; }
-
-        /* ── EMPTY STATE ── */
-        .empty {
-            text-align: center; padding: 3rem 1rem;
-            color: var(--text-dim); font-size: 0.85rem;
-        }
-
-        /* ── ANIMATIONS ── */
-        @keyframes rise {
-            from { opacity: 0; transform: translateY(22px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 900px) {
-            .stat-row { grid-template-columns: 1fr 1fr; }
-            .stat-row .hero { grid-column: 1 / -1; }
-        }
-        @media (max-width: 780px) {
-            .main-grid { grid-template-columns: 1fr; }
-            .shell     { padding: 1.5rem 1rem 4rem; }
-        }
-        @media (max-width: 560px) {
-            .stat-row   { grid-template-columns: 1fr 1fr; }
-            .stat-row .hero { grid-column: 1 / -1; }
-            .topnav     { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .nav-actions { width: 100%; }
-            .btn-add    { flex: 1; justify-content: center; }
-            .btn-export { flex: 1; justify-content: center; }
-        }
-        @media (max-width: 400px) {
-            .stat-row { grid-template-columns: 1fr; }
-        }
-        button, .btn-add, .action-btn { min-height: 44px; }
-
-        .hero {
+        .stat-card.hero {
             cursor: pointer;
         }
-
         .monthly-breakdown {
             max-height: 0;
             overflow: hidden;
             opacity: 0;
             transition: all 0.4s ease;
+            margin-top: 12px;
         }
-
-        .monthly-breakdown div {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-        }
-
         .monthly-breakdown.show {
             max-height: 200px;
             opacity: 1;
         }
-
-        /*Reset button*/
+        .stat-amount {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            line-height: 1;
+        }
+        .stat-card.hero .stat-amount { font-size: 3.4rem; }
+        .stat-amount span { color: var(--gold); font-size: 0.55em; vertical-align: super; margin-right: 2px; }
+        
+        /* main grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            animation: rise 0.6s 0.2s both;
+        }
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+        }
+        .expense-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .expense-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 1.6rem;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+        .expense-actions {
+            display: flex;
+            gap: 6px;
+            opacity: 0;
+            transition: all 0.2s;
+        }
+        .expense-item.active .expense-actions {
+            opacity: 1;
+        }
+        .action-btn {
+            width: 28px; height: 28px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .action-btn.edit:hover {
+            border-color: rgba(201,168,76,0.5);
+            background: var(--gold-dim);
+        }
+        .action-btn.del:hover {
+            border-color: rgba(192,97,79,0.5);
+            background: var(--danger-bg);
+        }
+        .budget-panel, .heatmap-panel, .chart-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.4rem 1.6rem;
+            margin-bottom: 1rem;
+        }
+        .budget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .ring-fill {
+            fill: none;
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-dasharray: 163;
+            stroke-dashoffset: 163;
+            transition: stroke-dashoffset 1.2s cubic-bezier(0.22,1,0.36,1);
+        }
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        .heatmap-cell {
+            aspect-ratio: 1;
+            border-radius: 4px;
+            background: var(--surface2);
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        .chart-canvas-wrap {
+            height: 240px;
+            display: none;
+        }
+        .chart-canvas-wrap.visible {
+            display: block;
+        }
         .btn-danger {
             background: rgba(255, 80, 80, 0.1);
             border: 1px solid rgba(255, 80, 80, 0.3);
@@ -540,571 +386,372 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-
-        .btn-danger:hover {
-            background: rgba(255, 80, 80, 0.2);
-            transform: translateY(-1px);
-        }
         .reset-container {
-            margin-top: 40px;      
+            margin-top: 40px;
             display: flex;
-            justify-content: flex-end;  
+            justify-content: flex-end;
+        }
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 780px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .shell { padding: 1.5rem 1rem 3rem; }
+            .topnav { flex-direction: column; align-items: stretch; }
+            .nav-actions { justify-content: flex-start; }
+            .brand { align-items: flex-start; }
+            .stat-row { grid-template-columns: 1fr 1fr; }
+            .stat-row .hero { grid-column: 1 / -1; }
+        }
+        @media (max-width: 560px) {
+            .nav-actions { flex-direction: column; width: 100%; }
+            .btn-add, .btn-export { justify-content: center; width: 100%; }
+            .stat-row { grid-template-columns: 1fr; }
         }
     </style>
-
-
 </head>
 <body>
-
-
 <div class="bg-atmosphere"></div>
 <div class="bg-grid"></div>
-{% include 'components/loader.html' %}
-
 <div class="shell">
-
-    <!-- TOP NAV -->
+    <!-- ==========  TOP NAV - PERFECTLY ALIGNED ========== -->
     <nav class="topnav">
         <div class="brand">
             <div class="brand-eyebrow">Finance Tracker</div>
             <div class="brand-name">Expense <em>Dashboard</em></div>
         </div>
         <div class="nav-actions">
-            <a href="{% url 'export_csv' %}" class="btn-export">⬇ Export CSV</a>
-            <a href="{% url 'add_expense' %}" class="btn-add">+ Add Expense</a>
+            <a href="#" class="btn-export" id="exportMockBtn">⬇ Export CSV</a>
+            <a href="#" class="btn-add" id="addMockBtn">+ Add Expense</a>
         </div>
     </nav>
-    
 
-
-    <!-- SEARCH / FILTER BAR -->
+    <!-- SEARCH & FILTER (static sample) -->
     <div class="search-section">
         <div class="search-bar">
             <span class="search-icon">🔍</span>
-            <input
-                class="search-input"
-                id="searchInput"
-                type="text"
-                placeholder="Search expenses by title, category, note…"
-                value="{{ search }}"
-                autocomplete="off"
-            >
-            <button class="search-clear {% if search %}visible{% endif %}" id="clearSearch" title="Clear">✕</button>
+            <input class="search-input" id="searchInput" type="text" placeholder="Search expenses by title, category, note…" autocomplete="off">
+            <button class="search-clear" id="clearSearch">✕</button>
         </div>
-        <div class="filter-chips-row">
-            <a href="?" class="filter-chip {% if not cat_filter %}active{% endif %}">All</a>
-            {% for cat in all_categories %}
-            <a href="?{% if search %}q={{ search }}&{% endif %}cat={{ cat }}"
-               class="filter-chip {% if cat_filter == cat %}active{% endif %}">
-                {{ cat }}
-            </a>
-            {% endfor %}
+        <div class="filter-chips-row" id="filterChips">
+            <a href="#" data-cat="" class="filter-chip active">All</a>
+            <a href="#" data-cat="Food" class="filter-chip">Food</a>
+            <a href="#" data-cat="Travel" class="filter-chip">Travel</a>
+            <a href="#" data-cat="Shopping" class="filter-chip">Shopping</a>
+            <a href="#" data-cat="Bills" class="filter-chip">Bills</a>
+            <a href="#" data-cat="Health" class="filter-chip">Health</a>
         </div>
     </div>
 
-    <!-- STAT ROW -->
+    <!-- STAT ROW (dynamic demo data) -->
     <div class="stat-row">
-
-        <div class="stat-card hero">
+        <div class="stat-card hero" id="heroStat">
             <div class="stat-label">Total Spend</div>
-            <div class="stat-amount">
-                <span>₹</span><span class="counter" data-target="{{ total }}">0</span>
-            </div>
+            <div class="stat-amount"><span>₹</span><span id="totalAmount">0</span></div>
             <div class="stat-sub">Across all categories &amp; time periods</div>
             <div class="deco-ring"></div>
             <div class="stat-sub">Tap to view monthly breakdown</div>
-            <div class="monthly-breakdown">
-            {% for month, value in monthly_data.items %}
-            <div>
-                <span>{{ month }}</span>
-                <span>₹{{ value }}</span>
-            </div>
-            {% endfor %}
+            <div class="monthly-breakdown" id="monthlyBreakdown"></div>
         </div>
-        </div>
-        
         <div class="stat-card">
             <div class="stat-label">This Month</div>
-            <div class="stat-amount">
-                <span>₹</span><span class="counter" data-target="{{ monthly_total }}">0</span>
-            </div>
-            <div class="stat-sub" style="margin-top:0.5rem;">
-                {% if difference is not None %}
-                    <span class="stat-badge {{ month_change_dir }}">
-                        {% if month_change_dir == 'up' %}↑{% else %}↓{% endif %}
-                        ₹{{ difference }} vs last month
-                    </span>
-                {% else %}
-                    <span class="stat-badge neutral">No prior data</span>
-                {% endif %}
-            </div>
+            <div class="stat-amount"><span>₹</span><span id="monthlyTotal">0</span></div>
+            <div class="stat-sub"><span class="stat-badge neutral" id="monthChange">↕ vs last month</span></div>
         </div>
-
         <div class="stat-card">
             <div class="stat-label">This Week</div>
-            <div class="stat-amount">
-                <span>₹</span><span class="counter" data-target="{{ weekly_total }}">0</span>
-            </div>
-            <div class="stat-sub" style="margin-top:0.5rem;">
-                <span class="stat-badge neutral">↕ recent 7 days</span>
-            </div>
+            <div class="stat-amount"><span>₹</span><span id="weeklyTotal">0</span></div>
+            <div class="stat-sub"><span class="stat-badge neutral">recent 7 days</span></div>
         </div>
-
         <div class="stat-card">
             <div class="stat-label">Daily Average</div>
-            <div class="stat-amount">
-                <span>₹</span><span class="counter" data-target="{{ avg_daily }}">0</span>
-            </div>
-            <div class="stat-sub" style="margin-top:0.5rem;">
-                <span class="stat-badge neutral">📊 last 30 days</span>
-            </div>
+            <div class="stat-amount"><span>₹</span><span id="dailyAvg">0</span></div>
+            <div class="stat-sub"><span class="stat-badge neutral">last 30 days</span></div>
         </div>
-
     </div>
 
-    <!-- MAIN GRID -->
+    <!-- MAIN GRID: expense list + side widgets -->
     <div class="main-grid">
-
-        <!-- Expense list -->
         <div class="panel">
-            <div class="panel-header">
+            <div class="panel-header" style="display: flex; justify-content: space-between; padding: 1.4rem 1.6rem 1rem; border-bottom: 1px solid var(--border);">
                 <div class="panel-title">Recent <em>Expenses</em></div>
-                <span class="panel-count" id="listCount">{{ expenses|length }} entries</span>
+                <span class="panel-count" id="listCount">0 entries</span>
             </div>
-            <div class="expense-list" id="expenseList">
-                {% for expense in expenses %}
-                <div class="expense-item" onclick="toggleActions(this)"
-                     data-title="{{ expense.title|default:expense.category|lower }}"
-                     data-cat="{{ expense.category|lower }}">
-                    <div class="expense-icon">
-                        {% if expense.category == "Food" %}🍽
-                        {% elif expense.category == "Travel" %}✈
-                        {% elif expense.category == "Bills" %}📄
-                        {% elif expense.category == "Health" %}💊
-                        {% elif expense.category == "Shopping" %}🛍
-                        {% else %}💳{% endif %}
-                    </div>
-                    <div class="expense-info">
-                        <div class="expense-title">{{ expense.title|default:expense.category }}</div>
-                        <div class="expense-meta">{{ expense.category }} · {{ expense.date|date:"d M Y" }}</div>
-                    </div>
-                    <div class="expense-amount">₹{{ expense.amount }}</div>
-                    <div class="expense-actions">
-                        <a href="{% url 'edit_expense' expense.id %}" class="action-btn edit" title="Edit">✏</a>
-                        <a href="{% url 'delete_expense' expense.id %}" class="action-btn del" title="Delete">✕</a>
-                    </div>
-                </div>
-                {% empty %}
-                <div class="empty">No expenses recorded yet.</div>
-                {% endfor %}
-            </div>
+            <div class="expense-list" id="expenseListContainer"></div>
         </div>
-
-        <!-- Side stack -->
         <div class="side-stack">
-
-            <!-- Highest expense -->
-            <div class="highlight-card">
+            <div class="highlight-card" style="background: var(--surface); border-radius: var(--radius-lg); padding: 1.4rem 1.6rem;">
                 <div class="panel-title" style="font-size:1.1rem;">Highest <em>Expense</em></div>
-                {% if highest_expense %}
-                <div class="highlight-amount"><span>₹</span>{{ highest_expense.amount }}</div>
-                <div class="highlight-title">{{ highest_expense.title|default:highest_expense.category }}</div>
-                {% else %}
-                <div class="highlight-title" style="margin-top:0.8rem;">No data yet.</div>
-                {% endif %}
+                <div id="highestExpenseBlock"><div class="highlight-title" style="margin-top:0.8rem;">No data yet.</div></div>
             </div>
-
-            <!-- Weekly breakdown -->
-            <div class="weekly-card">
+            <div class="weekly-card" style="background: var(--surface); border-radius: var(--radius-lg); padding: 1.4rem 1.6rem;">
                 <div class="panel-title" style="font-size:1.1rem; margin-bottom:1rem;">Weekly <em>Report</em></div>
-                {% for day, amount in weekly_report.items %}
-                <div class="weekly-row">
-                    <div class="weekly-day">{{ day }}</div>
-                    <div class="weekly-bar-wrap">
-                        <div class="weekly-bar" style="width:0%" data-val="{{ amount }}"></div>
-                    </div>
-                    <div class="weekly-amt">₹{{ amount }}</div>
-                </div>
-                {% endfor %}
+                <div id="weeklyReportContainer"></div>
             </div>
-
         </div>
     </div>
 
-    <!-- BUDGET PROGRESS RINGS -->
+    <!-- Budget section -->
     <div class="budget-panel">
         <div class="panel-title" style="font-size:1.1rem;">Budget <em>Limits</em></div>
-
-        {% if budget_data %}
-        <div class="budget-grid" id="budgetGrid">
-            {% for b in budget_data %}
-            <div class="budget-item">
-                <div class="budget-ring-wrap">
-                    <svg class="budget-ring-svg" viewBox="0 0 58 58">
-                        <circle class="ring-track" cx="29" cy="29" r="26"/>
-                        <circle
-                            class="ring-fill {% if b.pct >= 100 %}danger{% elif b.pct >= 80 %}warning{% else %}safe{% endif %}"
-                            cx="29" cy="29" r="26"
-                            data-pct="{{ b.pct }}"
-                        />
-                    </svg>
-                    <div class="ring-pct">{{ b.pct }}%</div>
-                </div>
-                <div class="budget-cat-label">{{ b.category }}</div>
-                <div class="budget-amounts">₹{{ b.spent }} / ₹{{ b.limit }}</div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p style="font-size:0.82rem; color:var(--text-dim); margin-top:0.7rem;">
-            No budgets set yet. Add a limit below and track your spending.
-        </p>
-        {% endif %}
-
-        <!-- Quick budget setter -->
-        <form method="POST" action="{% url 'set_budget' %}" class="budget-form-row">
-            {% csrf_token %}
-            <select name="category" required>
-                <option value="" disabled selected>Category</option>
-                {% for cat in all_categories %}
-                <option value="{{ cat }}">{{ cat }}</option>
-                {% endfor %}
+        <div id="budgetGrid" class="budget-grid"></div>
+        <div class="budget-form-row" style="display: flex; gap: 8px; margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+            <select id="budgetCategory" style="flex:1; background: var(--surface2); border-radius: 10px; padding: 8px;">
+                <option value="Food">Food</option><option value="Travel">Travel</option><option value="Shopping">Shopping</option><option value="Bills">Bills</option><option value="Health">Health</option>
             </select>
-            <input type="number" name="limit" placeholder="₹ Monthly limit" min="1" step="1" required>
-            <button type="submit" class="btn-set-budget">Set</button>
-        </form>
+            <input type="number" id="budgetLimit" placeholder="₹ Monthly limit" style="flex:1; background: var(--surface2); border-radius: 10px; padding: 8px;">
+            <button id="setBudgetBtn" class="btn-set-budget" style="background: var(--gold-dim); border-radius: 10px; padding: 8px 16px;">Set</button>
+        </div>
     </div>
 
-    <!-- HEATMAP — last 35 days -->
+    <!-- Heatmap + Chart -->
     <div class="heatmap-panel">
-        <div class="heatmap-header">
+        <div class="heatmap-header" style="display: flex; justify-content: space-between;">
             <div class="panel-title">Spending <em>Heatmap</em></div>
-            <span style="font-size:11px; color:var(--text-muted);">Last 35 days</span>
+            <span style="font-size:11px;">Last 35 days</span>
         </div>
         <div class="heatmap-grid" id="heatmapGrid"></div>
-        <div class="heatmap-legend">
-            <span>Less</span>
-            <div class="legend-cells" id="legendCells"></div>
-            <span>More</span>
+        <div class="heatmap-legend" style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px;">
+            <span>Less</span><div class="legend-cells" id="legendCells" style="display: flex; gap: 3px;"></div><span>More</span>
         </div>
     </div>
 
-    <!-- DUAL CHART -->
     <div class="chart-panel">
-        <div class="chart-header">
+        <div class="chart-header" style="display: flex; justify-content: space-between;">
             <div class="panel-title">Spending <em>Overview</em></div>
-            <div class="chart-toggle">
+            <div class="chart-toggle" style="display: flex; gap: 4px;">
                 <div class="chart-tab active" data-chart="donut">By Category</div>
-                <div class="chart-tab"         data-chart="bar">Breakdown</div>
+                <div class="chart-tab" data-chart="bar">Breakdown</div>
             </div>
         </div>
-        <div class="chart-canvas-wrap visible" id="wrap-donut">
-            <canvas id="chartDonut"></canvas>
-        </div>
-        <div class="chart-canvas-wrap" id="wrap-bar">
-            <canvas id="chartBar"></canvas>
-        </div>
+        <div class="chart-canvas-wrap visible" id="wrap-donut"><canvas id="chartDonut"></canvas></div>
+        <div class="chart-canvas-wrap" id="wrap-bar"><canvas id="chartBar"></canvas></div>
     </div>
-    <div class="reset-container">
-    <form method="POST" action="{% url 'clear_all' %}" onsubmit="return confirmReset()">
-        {% csrf_token %}
-        <button type="submit" class="btn-danger">
-            🗑 Reset Data
-        </button>
-    </form>
+    <div class="reset-container"><button id="resetBtn" class="btn-danger">🗑 Reset Data</button></div>
 </div>
 
-</div><!-- /shell -->
-
-
-
 <script>
+    // ---------- MOCK DATA MODEL ----------
+    let expenses = [
+        { id: 1, title: "Groceries", category: "Food", amount: 2450, date: "2025-03-18" },
+        { id: 2, title: "Flight tickets", category: "Travel", amount: 8200, date: "2025-03-15" },
+        { id: 3, title: "New headphones", category: "Shopping", amount: 4999, date: "2025-03-10" },
+        { id: 4, title: "Electricity bill", category: "Bills", amount: 1800, date: "2025-03-05" },
+        { id: 5, title: "Gym subscription", category: "Health", amount: 2200, date: "2025-03-01" },
+        { id: 6, title: "Coffee & snacks", category: "Food", amount: 860, date: "2025-02-25" },
+        { id: 7, title: "Hotel booking", category: "Travel", amount: 3400, date: "2025-02-20" },
+        { id: 8, title: "Winter jacket", category: "Shopping", amount: 3200, date: "2025-02-18" },
+        { id: 9, title: "Internet bill", category: "Bills", amount: 999, date: "2025-02-15" },
+    ];
 
-function confirmReset() {
-    return confirm("⚠️ Are you sure you want to delete all expenses?");
-}
+    let budgets = { "Food": 6000, "Travel": 12000, "Shopping": 5000, "Bills": 4000, "Health": 3000 };
 
-/* ═══════════════════════════════════════════
-   ANIMATED COUNTERS
-═══════════════════════════════════════════ */
-function animateCounter(el, target, duration) {
-    duration = duration || 1400;
-    const startTime = performance.now();
-    const isFloat   = !Number.isInteger(target);
-
-    function tick(now) {
-        const elapsed  = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased    = 1 - Math.pow(1 - progress, 4);
-        const value    = target * eased;
-        el.textContent = isFloat
-            ? value.toLocaleString('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2 })
-            : Math.round(value).toLocaleString('en-IN');
-        if (progress < 1) requestAnimationFrame(tick);
+    // helper: get current date context
+    function getDateStats() {
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+        const oneWeekAgo = new Date(); oneWeekAgo.setDate(now.getDate() - 7);
+        const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(now.getDate() - 30);
+        
+        let total = 0, monthlySum = 0, weeklySum = 0, dailySum30 = 0, daysIn30 = 0;
+        let catMap = new Map();
+        let monthlyBreakdown = {};
+        
+        expenses.forEach(exp => {
+            total += exp.amount;
+            const d = new Date(exp.date);
+            const monthKey = d.toLocaleString('default', { month: 'short', year: 'numeric' });
+            monthlyBreakdown[monthKey] = (monthlyBreakdown[monthKey] || 0) + exp.amount;
+            if (d.getMonth() === currentMonth && d.getFullYear() === currentYear) monthlySum += exp.amount;
+            if (d >= oneWeekAgo) weeklySum += exp.amount;
+            if (d >= thirtyDaysAgo) { dailySum30 += exp.amount; daysIn30++; }
+            catMap.set(exp.category, (catMap.get(exp.category) || 0) + exp.amount);
+        });
+        const avgDaily = daysIn30 > 0 ? Math.round(dailySum30 / daysIn30) : 0;
+        const highest = expenses.length ? expenses.reduce((max, e) => e.amount > max.amount ? e : max, expenses[0]) : null;
+        return { total, monthlySum, weeklySum, avgDaily, highest, catMap, monthlyBreakdown };
     }
-    requestAnimationFrame(tick);
-}
 
-function toggleActions(item) {
-    // close others
-    document.querySelectorAll('.expense-item').forEach(el => {
-        if (el !== item) {
-            el.classList.remove('active');
-        }
-    });
-
-    // toggle current
-    item.classList.toggle('active');
-}
-
-document.querySelectorAll('.counter').forEach(function(el) {
-    animateCounter(el, parseFloat(el.dataset.target) || 0);
-});
-
-/* ═══════════════════════════════════════════
-   WEEKLY BARS
-═══════════════════════════════════════════ */
-window.addEventListener('load', function() {
-    var bars = document.querySelectorAll('.weekly-bar');
-    var max  = 0;
-    bars.forEach(function(b) { var v = parseFloat(b.dataset.val) || 0; if (v > max) max = v; });
-    bars.forEach(function(b) {
-        var v   = parseFloat(b.dataset.val) || 0;
-        var pct = max > 0 ? (v / max * 100) : 0;
-        setTimeout(function() { b.style.width = pct + '%'; }, 120);
-    });
-});
-
-/* ═══════════════════════════════════════════
-   BUDGET RINGS
-═══════════════════════════════════════════ */
-var CIRCUMFERENCE = 2 * Math.PI * 26; // ~163.4
-document.querySelectorAll('.ring-fill').forEach(function(ring) {
-    var pct    = parseInt(ring.dataset.pct) || 0;
-    var offset = CIRCUMFERENCE * (1 - pct / 100);
-    setTimeout(function() { ring.style.strokeDashoffset = offset; }, 200);
-});
-
-/* ═══════════════════════════════════════════
-   HEATMAP
-═══════════════════════════════════════════ */
-var heatmapData = JSON.parse('{{ heatmap|escapejs }}');
-var heatmapMax = parseFloat("{{ heatmap_max|default:'1' }}") || 1;
-var grid        = document.getElementById('heatmapGrid');
-
-heatmapData.forEach(function(day) {
-    var cell  = document.createElement('div'); 
-    cell.className = 'heatmap-cell';
-    var amt   = day.amount;
-    if (amt > 0) {
-        var intensity = Math.max(0.15, Math.min(1, amt / heatmapMax));
-        cell.style.background = 'rgba(201,168,76,' + intensity + ')';
-    }
-    var parts = day.date.split('-');
-    var label = parts[2] + '/' + parts[1];
-    cell.setAttribute('data-tip', label + '  ₹' + amt.toLocaleString('en-IN'));
-    grid.appendChild(cell);
-});
-
-document.querySelectorAll('.heatmap-cell').forEach(cell => {
-    cell.addEventListener('click', function () {
-        // remove existing tooltip
-        document.querySelectorAll('.heatmap-tooltip').forEach(t => t.remove());
-
-        const tooltip = document.createElement('div');
-        tooltip.className = 'heatmap-tooltip';
-        tooltip.textContent = this.getAttribute('data-tip');
-
-        document.body.appendChild(tooltip);
-
-        const rect = this.getBoundingClientRect();
-
-        tooltip.style.position = 'fixed';
-        tooltip.style.left = rect.left + rect.width / 2 + 'px';
-        tooltip.style.top = rect.top - 30 + 'px';
-        tooltip.style.transform = 'translateX(-50%)';
-
-        setTimeout(() => tooltip.remove(), 2000);
-    });
-});
-
-// Legend
-var legendEl = document.getElementById('legendCells');
-[0, 0.15, 0.35, 0.6, 1].forEach(function(v) {
-    var c = document.createElement('div');
-    c.className = 'legend-cell';
-    c.style.background = v === 0 ? 'var(--surface2)' : 'rgba(201,168,76,' + v + ')';
-    legendEl.appendChild(c);
-});
-
-/* ═══════════════════════════════════════════
-   CHARTS
-═══════════════════════════════════════════ */
-var chartLabels = JSON.parse('{{ labels|escapejs }}');
-var chartData   = JSON.parse('{{ data|escapejs }}');
-
-var PALETTE = [
-    'rgba(201,168,76,0.82)',
-    'rgba(120,80,220,0.65)',
-    'rgba(90,158,114,0.72)',
-    'rgba(192,97,79,0.72)',
-    'rgba(80,140,200,0.65)',
-    'rgba(180,120,60,0.68)',
-    'rgba(160,80,160,0.65)',
-    'rgba(60,160,180,0.65)',
-];
-
-var tooltipDefaults = {
-    backgroundColor: '#1c1c21',
-    borderColor:     'rgba(201,168,76,0.3)',
-    borderWidth:     1,
-    titleColor:      '#c9a84c',
-    bodyColor:       '#f0ece3',
-    padding:         12,
-};
-
-// Donut
-var donutCtx = document.getElementById('chartDonut').getContext('2d');
-new Chart(donutCtx, {
-    type: 'doughnut',
-    data: {
-        labels: chartLabels,
-        datasets: [{
-            data:            chartData,
-            backgroundColor: PALETTE,
-            borderWidth:     0,
-            hoverOffset:     8,
-        }]
-    },
-    options: {
-        responsive: true, maintainAspectRatio: false,
-        cutout: '68%',
-        plugins: {
-            legend: {
-                position: 'right',
-                labels: {
-                    color:         '#8a8680',
-                    font:          { family: 'DM Sans', size: 12 },
-                    padding:       16,
-                    pointStyle:    'circle',
-                    usePointStyle: true,
-                }
-            },
-            tooltip: Object.assign({}, tooltipDefaults, {
-                callbacks: { label: function(ctx) { return '  ₹' + ctx.parsed.toLocaleString('en-IN'); } }
-            }),
-        }
-    }
-});
-
-// Bar
-var barCtx = document.getElementById('chartBar').getContext('2d');
-new Chart(barCtx, {
-    type: 'bar',
-    data: {
-        labels: chartLabels,
-        datasets: [{
-            label:           'Amount (₹)',
-            data:            chartData,
-            backgroundColor: 'rgba(201,168,76,0.7)',
-            borderColor:     'rgba(201,168,76,0.85)',
-            borderWidth:     1,
-            borderRadius:    8,
-            borderSkipped:   false,
-        }]
-    },
-    options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: {
-            legend: { display: false },
-            tooltip: Object.assign({}, tooltipDefaults, {
-                callbacks: { label: function(ctx) { return ' ₹' + ctx.parsed.y.toLocaleString('en-IN'); } }
-            })
-        },
-        scales: {
-            x: {
-                ticks:  { color: '#8a8680', font: { family: 'DM Sans', size: 12 } },
-                grid:   { color: 'rgba(255,255,255,0.04)' },
-                border: { color: 'rgba(255,255,255,0.06)' }
-            },
-            y: {
-                ticks: {
-                    color: '#8a8680', font: { family: 'DM Sans', size: 12 },
-                    callback: function(v) { return '₹' + v.toLocaleString('en-IN'); }
-                },
-                grid:   { color: 'rgba(255,255,255,0.04)' },
-                border: { color: 'rgba(255,255,255,0.06)' }
+    function getWeeklyReport() {
+        const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const today = new Date();
+        const startOfWeek = new Date(today);
+        const dayOfWeek = today.getDay(); // 0 Sun .. 6 Sat
+        const diffToMonday = (dayOfWeek === 0 ? -6 : 1 - dayOfWeek);
+        startOfWeek.setDate(today.getDate() + diffToMonday);
+        startOfWeek.setHours(0,0,0,0);
+        const report = { Mon:0, Tue:0, Wed:0, Thu:0, Fri:0, Sat:0, Sun:0 };
+        expenses.forEach(exp => {
+            const d = new Date(exp.date);
+            if (d >= startOfWeek) {
+                const weekday = d.toLocaleString('en', { weekday: 'short' });
+                if (report[weekday] !== undefined) report[weekday] += exp.amount;
             }
-        }
+        });
+        return Object.entries(report).map(([day, amt]) => ({ day, amount: amt }));
     }
-});
 
-// Chart tab toggle
-document.querySelectorAll('.chart-tab').forEach(function(tab) {
-    tab.addEventListener('click', function() {
-        document.querySelectorAll('.chart-tab').forEach(function(t) { t.classList.remove('active'); });
-        this.classList.add('active');
-        var target = this.dataset.chart;
-        document.querySelectorAll('.chart-canvas-wrap').forEach(function(w) { w.classList.remove('visible'); });
-        document.getElementById('wrap-' + target).classList.add('visible');
+    function getHeatmapData() {
+        const last35 = [];
+        const today = new Date();
+        for (let i = 34; i >= 0; i--) {
+            const d = new Date(); d.setDate(today.getDate() - i);
+            const yyyymmdd = d.toISOString().slice(0,10);
+            let amount = 0;
+            expenses.forEach(e => { if (e.date === yyyymmdd) amount += e.amount; });
+            last35.push({ date: yyyymmdd, amount });
+        }
+        return last35;
+    }
+
+    function renderAll() {
+        const stats = getDateStats();
+        document.getElementById('totalAmount').innerText = stats.total.toLocaleString('en-IN');
+        document.getElementById('monthlyTotal').innerText = stats.monthlySum.toLocaleString('en-IN');
+        document.getElementById('weeklyTotal').innerText = stats.weeklySum.toLocaleString('en-IN');
+        document.getElementById('dailyAvg').innerText = stats.avgDaily.toLocaleString('en-IN');
+        const monthChangeSpan = document.getElementById('monthChange');
+        monthChangeSpan.innerHTML = `📊 ₹${stats.monthlySum} this month`;
+        
+        // monthly breakdown
+        const monthlyDiv = document.getElementById('monthlyBreakdown');
+        monthlyDiv.innerHTML = '';
+        Object.entries(stats.monthlyBreakdown).slice(0,5).forEach(([mon, val]) => {
+            const row = document.createElement('div'); row.style.display='flex'; row.style.justifyContent='space-between'; row.style.padding='4px 0';
+            row.innerHTML = `<span>${mon}</span><span>₹${val.toLocaleString('en-IN')}</span>`;
+            monthlyDiv.appendChild(row);
+        });
+        // highest expense
+        const highBlock = document.getElementById('highestExpenseBlock');
+        if(stats.highest) highBlock.innerHTML = `<div class="highlight-amount" style="font-size:2rem;"><span>₹</span>${stats.highest.amount}</div><div class="highlight-title">${stats.highest.title || stats.highest.category}</div>`;
+        else highBlock.innerHTML = '<div class="highlight-title">No data yet.</div>';
+        
+        // weekly report bars
+        const weeklyArr = getWeeklyReport();
+        const maxWeekly = Math.max(...weeklyArr.map(w => w.amount), 1);
+        const weeklyContainer = document.getElementById('weeklyReportContainer');
+        weeklyContainer.innerHTML = '';
+        weeklyArr.forEach(({day, amount}) => {
+            const pct = (amount / maxWeekly) * 100;
+            const row = document.createElement('div'); row.className = 'weekly-row'; row.style.display='flex'; row.style.alignItems='center'; row.style.gap='10px'; row.style.padding='6px 0'; row.style.borderBottom='1px solid var(--border)';
+            row.innerHTML = `<div class="weekly-day" style="min-width:38px;">${day}</div><div class="weekly-bar-wrap" style="flex:1; height:4px; background:var(--surface2); border-radius:2px;"><div class="weekly-bar" style="width:${pct}%; height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-light)); border-radius:2px;"></div></div><div class="weekly-amt" style="min-width:60px; text-align:right;">₹${amount.toLocaleString('en-IN')}</div>`;
+            weeklyContainer.appendChild(row);
+        });
+        
+        // expense list + filter
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const activeCat = document.querySelector('.filter-chip.active')?.dataset.cat || '';
+        let filtered = expenses.filter(exp => {
+            const matchSearch = exp.title.toLowerCase().includes(searchTerm) || exp.category.toLowerCase().includes(searchTerm);
+            const matchCat = activeCat === '' || exp.category === activeCat;
+            return matchSearch && matchCat;
+        });
+        document.getElementById('listCount').innerText = filtered.length + ' entries';
+        const container = document.getElementById('expenseListContainer');
+        container.innerHTML = '';
+        filtered.forEach(exp => {
+            const div = document.createElement('div'); div.className = 'expense-item'; div.setAttribute('data-id', exp.id);
+            div.innerHTML = `
+                <div class="expense-icon">${exp.category === 'Food' ? '🍽' : exp.category === 'Travel' ? '✈' : exp.category === 'Bills' ? '📄' : exp.category === 'Health' ? '💊' : exp.category === 'Shopping' ? '🛍' : '💳'}</div>
+                <div class="expense-info"><div class="expense-title">${exp.title}</div><div class="expense-meta">${exp.category} · ${exp.date}</div></div>
+                <div class="expense-amount">₹${exp.amount.toLocaleString('en-IN')}</div>
+                <div class="expense-actions"><button class="action-btn edit" data-id="${exp.id}">✏</button><button class="action-btn del" data-id="${exp.id}">✕</button></div>
+            `;
+            div.addEventListener('click', (e) => { if(e.target.closest('.action-btn')) return; div.classList.toggle('active'); document.querySelectorAll('.expense-item').forEach(el => { if(el !== div) el.classList.remove('active'); }); });
+            div.querySelector('.edit')?.addEventListener('click', (e) => { e.stopPropagation(); alert(`Edit ${exp.title} (simulated)`); });
+            div.querySelector('.del')?.addEventListener('click', (e) => { e.stopPropagation(); expenses = expenses.filter(e => e.id !== exp.id); renderAll(); renderCharts(); renderBudgets(); renderHeatmap(); });
+            container.appendChild(div);
+        });
+        
+        renderCharts(stats.catMap);
+        renderBudgets();
+        renderHeatmap();
+    }
+    
+    function renderCharts(catMap) {
+        const labels = Array.from(catMap.keys());
+        const data = Array.from(catMap.values());
+        if(window.donutChart) window.donutChart.destroy();
+        if(window.barChart) window.barChart.destroy();
+        const donutCtx = document.getElementById('chartDonunt')?.getContext('2d') || document.getElementById('chartDonut').getContext('2d');
+        window.donutChart = new Chart(donutCtx, {
+            type: 'doughnut', data: { labels, datasets: [{ data, backgroundColor: ['rgba(201,168,76,0.82)','rgba(120,80,220,0.65)','rgba(90,158,114,0.72)','rgba(192,97,79,0.72)','rgba(80,140,200,0.65)'] }] },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '68%', plugins: { legend: { position: 'right', labels: { color: '#8a8680' } } } }
+        });
+        const barCtx = document.getElementById('chartBar').getContext('2d');
+        window.barChart = new Chart(barCtx, {
+            type: 'bar', data: { labels, datasets: [{ label: 'Amount (₹)', data, backgroundColor: 'rgba(201,168,76,0.7)', borderRadius: 8 }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => '₹'+v } } } }
+        });
+    }
+    
+    function renderBudgets() {
+        const spentMap = new Map();
+        expenses.forEach(exp => { spentMap.set(exp.category, (spentMap.get(exp.category) || 0) + exp.amount); });
+        const grid = document.getElementById('budgetGrid');
+        grid.innerHTML = '';
+        Object.entries(budgets).forEach(([cat, limit]) => {
+            const spent = spentMap.get(cat) || 0;
+            const pct = Math.min(100, Math.round((spent/limit)*100));
+            const cls = pct >= 100 ? 'danger' : pct >= 80 ? 'warning' : 'safe';
+            const circumference = 163;
+            const offset = circumference * (1 - pct/100);
+            const item = document.createElement('div'); item.className='budget-item';
+            item.innerHTML = `
+                <div class="budget-ring-wrap" style="position:relative; width:64px; margin:0 auto;"><svg width="64" height="64" viewBox="0 0 58 58"><circle cx="29" cy="29" r="26" fill="none" stroke="#1c1c21" stroke-width="5"/><circle cx="29" cy="29" r="26" fill="none" stroke="${cls==='danger'?'#c0614f':cls==='warning'?'#e0a040':'#c9a84c'}" stroke-width="5" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" style="transition: stroke-dashoffset 0.8s;"/></svg><div class="ring-pct" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:11px;">${pct}%</div></div>
+                <div class="budget-cat-label">${cat}</div><div class="budget-amounts">₹${spent} / ₹${limit}</div>
+            `;
+            grid.appendChild(item);
+        });
+    }
+    
+    function renderHeatmap() {
+        const heatData = getHeatmapData();
+        const maxAmt = Math.max(...heatData.map(d => d.amount), 1);
+        const grid = document.getElementById('heatmapGrid');
+        grid.innerHTML = '';
+        heatData.forEach(day => {
+            const cell = document.createElement('div'); cell.className = 'heatmap-cell';
+            const intensity = day.amount > 0 ? Math.min(1, day.amount / maxAmt) : 0.1;
+            cell.style.background = day.amount === 0 ? 'var(--surface2)' : `rgba(201,168,76,${intensity})`;
+            const parts = day.date.split('-');
+            const tip = `${parts[2]}/${parts[1]}  ₹${day.amount.toLocaleString('en-IN')}`;
+            cell.setAttribute('data-tip', tip);
+            cell.addEventListener('click', () => alert(tip));
+            grid.appendChild(cell);
+        });
+        const legend = document.getElementById('legendCells'); legend.innerHTML = '';
+        [0, 0.2, 0.5, 0.8, 1].forEach(v => { const l = document.createElement('div'); l.style.width='12px'; l.style.height='12px'; l.style.background= v===0 ? 'var(--surface2)' : `rgba(201,168,76,${v})`; l.style.borderRadius='2px'; legend.appendChild(l); });
+    }
+    
+    // Set budget
+    document.getElementById('setBudgetBtn')?.addEventListener('click', () => {
+        const cat = document.getElementById('budgetCategory').value;
+        const limit = parseInt(document.getElementById('budgetLimit').value);
+        if(limit && limit>0) { budgets[cat] = limit; renderBudgets(); }
+        else alert('Enter valid limit');
     });
-});
-
-const heroCard = document.querySelector('.hero');
-if (heroCard) {
-    heroCard.addEventListener('click', () => {
-        document.querySelector('.monthly-breakdown').classList.toggle('show');
+    document.getElementById('resetBtn')?.addEventListener('click', () => { if(confirm('Delete all expenses?')) { expenses = []; renderAll(); renderBudgets(); renderHeatmap(); } });
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', (e) => { e.preventDefault(); document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active')); chip.classList.add('active'); renderAll(); });
     });
-}
-
-/* ═══════════════════════════════════════════
-   LIVE SEARCH (client-side, no reload)
-═══════════════════════════════════════════ */
-var searchInput = document.getElementById('searchInput');
-var clearBtn    = document.getElementById('clearSearch');
-var items       = document.querySelectorAll('.expense-item[data-title]');
-var countEl     = document.getElementById('listCount');
-
-function filterList() {
-    var q   = searchInput.value.toLowerCase().trim();
-    var vis = 0;
-    items.forEach(function(item) {
-        var match = !q
-            || item.dataset.title.includes(q)
-            || item.dataset.cat.includes(q);
-        item.style.display = match ? '' : 'none';
-        if (match) vis++;
+    document.getElementById('searchInput')?.addEventListener('input', () => renderAll());
+    document.getElementById('clearSearch')?.addEventListener('click', () => { document.getElementById('searchInput').value = ''; renderAll(); });
+    document.querySelectorAll('.chart-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            const target = this.dataset.chart;
+            document.getElementById('wrap-donut').classList.toggle('visible', target === 'donut');
+            document.getElementById('wrap-bar').classList.toggle('visible', target === 'bar');
+        });
     });
-    countEl.textContent = vis + ' ' + (vis === 1 ? 'entry' : 'entries');
-    clearBtn.classList.toggle('visible', q.length > 0);
-}
-
-searchInput.addEventListener('input', filterList);
-clearBtn.addEventListener('click', function() {
-    searchInput.value = '';
-    filterList();
-    searchInput.focus();
-});
-
-// Run on load in case of pre-filled search
-filterList();
+    document.getElementById('heroStat')?.addEventListener('click', () => { document.getElementById('monthlyBreakdown').classList.toggle('show'); });
+    document.getElementById('exportMockBtn')?.addEventListener('click', (e) => { e.preventDefault(); alert('CSV export demo: ' + JSON.stringify(expenses,null,2)); });
+    document.getElementById('addMockBtn')?.addEventListener('click', (e) => { e.preventDefault(); alert('Add expense modal would open (simulated)'); });
+    renderAll();
 </script>
-
-<script src="{% static 'js/loader.js' %}"></script>
-
-<script>
-window.addEventListener("load", function () {
-    setTimeout(() => {
-        const loader = document.getElementById("app-loader");
-        loader.style.opacity = "0";
-        loader.style.transition = "opacity 0.4s ease";
-
-        setTimeout(() => {
-            loader.style.display = "none";
-        }, 400);
-    }, 1000); 
-});
-</script>
-
 </body>
 </html>
