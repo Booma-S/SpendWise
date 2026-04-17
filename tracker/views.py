@@ -25,7 +25,7 @@ def home(request):
     search     = request.GET.get('q', '').strip()
     cat_filter = request.GET.get('cat', '').strip()
 
-    all_qs = Expense.objects.all().order_by('-date')
+    all_qs = Expense.objects.filter(user=request.user).order_by('-date')
     filtered_qs = all_qs
 
     if search:
@@ -117,7 +117,10 @@ def home(request):
     data   = [round(v, 2) for v in cat_totals.values()]
 
     # --- budget progress ---
-    budgets     = {b.category: b.limit for b in Budget.objects.all()}
+    budgets = {
+    b.category: b.limit
+    for b in Budget.objects.filter(user=request.user)
+    }
     budget_data = []
     for cat, spent in cat_totals.items():
         if cat in budgets:
@@ -143,7 +146,9 @@ def home(request):
 
     # --- distinct categories for filter chips ---
     all_categories = list(
-        Expense.objects.values_list('category', flat=True).distinct()
+        Expense.objects.filter(user=request.user)
+        .values_list('category', flat=True)
+        .distinct()
     )
 
     return render(request, 'home.html', {
@@ -176,6 +181,7 @@ def home(request):
 def add_expense(request):
     if request.method == 'POST':
         Expense.objects.create(
+            user=request.user, 
             title       = request.POST.get('title') or None,
             amount      = request.POST.get('amount'),
             category    = request.POST.get('category'),
@@ -191,7 +197,7 @@ def add_expense(request):
 #  EDIT
 # ─────────────────────────────────────────────
 def edit_expense(request, id):
-    expense = get_object_or_404(Expense, id=id)
+    expense = get_object_or_404(Expense, id=id, user=request.user)
     if request.method == 'POST':
         expense.title       = request.POST.get('title') or None
         expense.amount      = request.POST.get('amount')
@@ -208,7 +214,7 @@ def edit_expense(request, id):
 #  DELETE
 # ─────────────────────────────────────────────
 def delete_expense(request, id):
-    expense = get_object_or_404(Expense, id=id)
+    expense = get_object_or_404(Expense, id=id, user=request.user)
     expense.delete()
     return redirect('home')
 
@@ -221,7 +227,7 @@ def export_csv(request):
     response['Content-Disposition'] = 'attachment; filename="expenses.csv"'
     writer = csv.writer(response)
     writer.writerow(['Title', 'Amount', 'Category', 'Date', 'Description', 'Reference'])
-    for e in Expense.objects.all().order_by('-date'):
+    for e in Expense.objects.filter(user=request.user).order_by('-date'):
         writer.writerow([
             e.title or '',
             e.amount,
@@ -242,6 +248,7 @@ def set_budget(request):
         limit    = request.POST.get('limit', '').strip()
         if category and limit:
             Budget.objects.update_or_create(
+                user=request.user,
                 category=category,
                 defaults={'limit': float(limit)},
             )
@@ -254,7 +261,7 @@ def set_budget(request):
 def clear_all_expenses(request):
     if request.method == "POST":
         from .models import Expense
-        Expense.objects.all().delete()
+        Expense.objects.filter(user=request.user).delete()
     return redirect('home')
 
 def login_view(request):
