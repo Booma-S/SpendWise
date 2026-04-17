@@ -3,12 +3,10 @@
     inset: 0;
     z-index: 9999;
     background: #0d0d0f;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.4s ease;
+    overflow: hidden;
+    font-family: 'DM Mono', monospace;
 }
-:root {
+#app-loader {
     --gold: #c9a84c;
     --gold-dim: #8a6f2e;
     --gold-bright: #e8c76a;
@@ -20,24 +18,8 @@
     --text-dim: #8a8070;
   }
  
-  html, body {
-    width: 100%; height: 100%;
-    background: var(--bg);
-    font-family: 'DM Mono', monospace;
-  }
- 
-  /* ── dot grid background ── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: radial-gradient(circle, rgba(201,168,76,0.08) 1px, transparent 1px);
-    background-size: 32px 32px;
-    pointer-events: none;
-    z-index: 0;
-  }
- 
   /* ── ambient glow behind logo ── */
-  .glow-orb {
+  #app-loader .glow-orb {
     position: fixed;
     top: 50%; left: 50%;
     transform: translate(-50%, -60%);
@@ -55,7 +37,7 @@
   }
  
   /* ── main container ── */
-  .loader {
+  #app-loader .loader {
     position: fixed; inset: 0;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
@@ -64,18 +46,18 @@
   }
  
   /* ── brand header ── */
-  .brand {
+  #app-loader .brand {
     position: fixed; top: 32px; left: 40px;
     display: flex; align-items: center; gap: 10px;
     opacity: 0;
     animation: fade-in 0.8s ease 0.2s forwards;
   }
-  .brand-dot {
+  #app-loader .brand-dot {
     width: 8px; height: 8px;
     border-radius: 50%;
     background: var(--gold);
   }
-  .brand-label {
+  #app-loader .brand-label {
     font-family: 'DM Mono', monospace;
     font-size: 11px; font-weight: 300;
     letter-spacing: 0.18em; text-transform: uppercase;
@@ -83,26 +65,26 @@
   }
  
   /* ── rupee ring assembly ── */
-  .ring-assembly {
+  #app-loader .ring-assembly {
     position: relative;
     width: 220px; height: 220px;
     margin-bottom: 52px;
   }
  
-  .ring-svg {
+  #app-loader .ring-svg {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
   }
  
   /* outer track */
-  .track-outer {
+  #app-loader .track-outer {
     fill: none;
     stroke: rgba(201,168,76,0.08);
     stroke-width: 2;
   }
  
   /* animated gold arc */
-  .arc-gold {
+  #app-loader .arc-gold {
     fill: none;
     stroke: var(--gold);
     stroke-width: 2.5;
@@ -113,7 +95,7 @@
   }
  
   /* animated purple arc (inner) */
-  .arc-purple {
+  #app-loader .arc-purple {
     fill: none;
     stroke: var(--purple);
     stroke-width: 1.5;
@@ -124,7 +106,7 @@
   }
  
   /* inner ring subtle */
-  .track-inner {
+  #app-loader .track-inner {
     fill: none;
     stroke: rgba(107,91,164,0.08);
     stroke-width: 1;
@@ -140,20 +122,20 @@
   }
  
   /* tick marks on outer ring */
-  .tick {
+  #app-loader .tick {
     stroke: rgba(201,168,76,0.2);
     stroke-width: 1;
   }
  
   /* ── center rupee symbol ── */
-  .center-icon {
+  #app-loader .center-icon {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
   }
  
-  .rupee-symbol {
+  #app-loader .rupee-symbol {
     font-family: 'Cormorant Garamond', serif;
     font-size: 58px; font-weight: 400;
     color: transparent;
@@ -174,14 +156,14 @@
   }
  
   /* ── title block ── */
-  .title-block {
+  #app-loader .title-block {
     text-align: center;
     margin-bottom: 48px;
     opacity: 0;
     animation: slide-up 0.7s ease 1.5s forwards;
   }
  
-  .title-eyebrow {
+  #app-loader .title-eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 10px; font-weight: 300;
     letter-spacing: 0.22em; text-transform: uppercase;
@@ -189,14 +171,14 @@
     margin-bottom: 8px;
   }
  
-  .title-main {
+  #app-loader .title-main {
     font-family: 'Cormorant Garamond', serif;
     font-size: 32px; font-weight: 400;
     color: var(--text);
     line-height: 1.1;
   }
  
-  .title-main em {
+  #app-loader .title-main em {
     font-style: italic;
     color: var(--gold);
   }
@@ -207,7 +189,7 @@
   }
  
   /* ── status messages ── */
-  .status-area {
+  #app-loader .status-area {
     width: 340px;
     text-align: center;
     margin-bottom: 32px;
@@ -215,7 +197,7 @@
     position: relative;
   }
  
-  .status-msg {
+  #app-loader .status-msg {
     position: absolute;
     width: 100%; left: 0;
     font-size: 11px; font-weight: 300;
@@ -224,38 +206,38 @@
     opacity: 0;
     transition: opacity 0.4s ease;
   }
-  .status-msg.active { opacity: 1; }
+  #app-loader .status-msg.active { opacity: 1; }
  
   /* ── progress bar ── */
-  .progress-wrap {
+  #app-loader .progress-wrap {
     width: 260px;
     opacity: 0;
     animation: fade-in 0.6s ease 2s forwards;
   }
  
-  .progress-labels {
+  #app-loader .progress-labels {
     display: flex; justify-content: space-between;
     margin-bottom: 8px;
   }
-  .progress-label {
+  #app-loader .progress-label {
     font-size: 10px; font-weight: 300;
     letter-spacing: 0.12em;
     color: var(--text-dim);
   }
-  .progress-pct {
+  #app-loader .progress-pct {
     font-size: 10px; font-weight: 400;
     color: var(--gold);
     transition: opacity 0.3s;
   }
  
-  .progress-track {
+  #app-loader .progress-track {
     width: 100%; height: 1px;
     background: rgba(201,168,76,0.12);
     border-radius: 1px;
     overflow: hidden;
   }
  
-  .progress-fill {
+  #app-loader .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
     border-radius: 1px;
@@ -264,7 +246,7 @@
   }
  
   /* shimmer on fill */
-  .progress-fill::after {
+  #app-loader .progress-fill::after {
     content: '';
     position: absolute;
     top: 0; right: 0;
@@ -279,13 +261,13 @@
   }
  
   /* ── floating particles ── */
-  .particles {
+  #app-loader .particles {
     position: fixed; inset: 0;
     pointer-events: none; z-index: 1;
     overflow: hidden;
   }
  
-  .particle {
+  #app-loader .particle {
     position: absolute;
     bottom: -10px;
     width: 2px; height: 2px;
@@ -303,19 +285,19 @@
   }
  
   /* ── corner ornaments ── */
-  .corner {
+  #app-loader .corner {
     position: fixed;
     width: 40px; height: 40px;
     opacity: 0;
     animation: fade-in 1s ease 0.8s forwards;
   }
-  .corner--tl { top: 24px; left: 24px; }
-  .corner--tr { top: 24px; right: 24px; transform: scaleX(-1); }
-  .corner--bl { bottom: 24px; left: 24px; transform: scaleY(-1); }
-  .corner--br { bottom: 24px; right: 24px; transform: scale(-1, -1); }
+  #app-loader .corner--tl { top: 24px; left: 24px; }
+  #app-loader .corner--tr { top: 24px; right: 24px; transform: scaleX(-1); }
+  #app-loader .corner--bl { bottom: 24px; left: 24px; transform: scaleY(-1); }
+  #app-loader .corner--br { bottom: 24px; right: 24px; transform: scale(-1, -1); }
  
   /* ── data chips (decorative) ── */
-  .data-chips {
+  #app-loader .data-chips {
     position: fixed; bottom: 40px; left: 50%;
     transform: translateX(-50%);
     display: flex; gap: 16px;
@@ -323,7 +305,7 @@
     animation: fade-in 0.7s ease 2.5s forwards;
   }
  
-  .chip {
+  #app-loader .chip {
     padding: 5px 12px;
     border: 1px solid rgba(201,168,76,0.18);
     border-radius: 20px;
