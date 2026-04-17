@@ -270,20 +270,26 @@ def login_view(request):
         password = request.POST['password']
         remember = request.POST.get('remember')
 
+        # 🔥 Check if user exists FIRST
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, "No account found. Please sign up.")
+            return redirect('login')
+
         user = authenticate(request, username=username, password=password)
 
         if user:
             login(request, user)
 
-            if not remember:
-                request.session.set_expiry(0)  # logout when browser closes
+            if remember:
+                request.session.set_expiry(1209600)  # 2 weeks
+            else:
+                request.session.set_expiry(0)  # browser close
 
             return redirect('home')
         else:
-            messages.error(request, "Invalid credentials")
+            messages.error(request, "Incorrect password. Try again.")
 
     return render(request, 'login.html')
-
 
 def signup_view(request):
     if request.method == "POST":
@@ -291,15 +297,17 @@ def signup_view(request):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
 
-        if password1 == password2:
-            if User.objects.filter(username=username).exists():
-                messages.error(request, "Username already exists")
-            else:
-                user = User.objects.create_user(username=username, password=password1)
-                login(request, user)
-                return redirect('home')
-        else:
-            messages.error(request, "Passwords do not match")
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Account already exists. Please login.")
+            return redirect('login')
+
+        if password1 != password2:
+            messages.error(request, "Passwords do not match.")
+            return redirect('signup')
+
+        user = User.objects.create_user(username=username, password=password1)
+        login(request, user)
+        return redirect('home')
 
     return render(request, 'signup.html')
 

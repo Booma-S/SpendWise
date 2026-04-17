@@ -135,3 +135,42 @@ button:hover {
 .auth-card a:hover {
     text-decoration: underline;
 }
+
+/* POPUP MESSAGE */
+.popup-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.popup {
+    background: #1c1c21;
+    color: #f0ece3;
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    border-left: 4px solid #c9a84c;
+    animation: slideIn 0.3s ease;
+}
+
+.popup.error {
+    border-left-color: #ff4d4d;
+}
+
+.popup.success {
+    border-left-color: #4caf50;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

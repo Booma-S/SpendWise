@@ -609,6 +609,36 @@
             display: flex;
             justify-content: flex-end;  
         }
+
+        .logout-floating {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+
+            background: rgba(255, 77, 77, 0.1);
+            color: #ff4d4d;
+
+            padding: 10px 16px;
+            border-radius: 12px;
+
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            text-decoration: none;
+
+            border: 1px solid rgba(255, 77, 77, 0.2);
+
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .logout-floating:hover {
+            background: #ff4d4d;
+            color: white;
+            transform: translateY(-2px);
+        }
     </style>
 
 
@@ -616,6 +646,7 @@
 <body>
 
 {% include 'components/loader.html' %}
+<div id="main-content" style="display: none;">
 <div class="bg-atmosphere"></div>
 <div class="bg-grid"></div>
 
@@ -872,9 +903,16 @@
         </button>
     </form>
 </div>
+<a href="{% url 'logout' %}" class="logout-floating"
+
+   onclick="return confirm('Logout from SpendWise?')">
+
+   ⏻ Logout
+
+</a>
 
 </div><!-- /shell -->
-
+</div><!-- END main-content -->>
 
 
 <script>
@@ -1153,15 +1191,33 @@ filterList();
 
 <script>
 window.addEventListener("load", function () {
+
+    const loader = document.getElementById("app-loader");
+    const main   = document.getElementById("main-content");
+
+    // ✅ If already visited → skip loader
+    if (sessionStorage.getItem("visited")) {
+        if (loader) loader.style.display = "none";
+        if (main) main.style.display = "block";
+        return;
+    }
+
+    // ✅ First time only
+    sessionStorage.setItem("visited", "true");
+
     setTimeout(() => {
-        const loader = document.getElementById("app-loader");
-        loader.style.opacity = "0";
-        loader.style.transition = "opacity 0.4s ease";
+        if (loader) {
+            loader.style.opacity = "0";
+            loader.style.transition = "opacity 0.4s ease";
+        }
 
         setTimeout(() => {
-            loader.style.display = "none";
+            if (loader) loader.style.display = "none";
+            if (main) main.style.display = "block";
         }, 500);
-    }, 2500); 
+
+    }, 2500);
+
 });
 </script>
 

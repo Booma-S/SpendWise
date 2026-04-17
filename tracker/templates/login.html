@@ -11,7 +11,15 @@
 <div class="auth-container">
     <div class="auth-card">
         <h1>Welcome <em>Back</em></h1>
-
+        {% if messages %}
+        <div class="popup-container">
+            {% for message in messages %}
+                <div class="popup {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         <form method="POST">
             {% csrf_token %}
 
@@ -32,6 +40,14 @@
         <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
     </div>
 </div>
+<script>
+setTimeout(() => {
+    document.querySelectorAll('.popup').forEach(p => {
+        p.style.opacity = '0';
+        setTimeout(() => p.remove(), 500);
+    });
+}, 3000);
+</script>
 
 </body>
 </html>
