@@ -4,6 +4,9 @@
     z-index: 9999;
     background: #0d0d0f;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 :root {
     --gold: #c9a84c;
