@@ -9,7 +9,13 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .models import Budget, Expense
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+@login_required
 
 # ─────────────────────────────────────────────
 #  HOME / DASHBOARD
@@ -250,3 +256,46 @@ def clear_all_expenses(request):
         from .models import Expense
         Expense.objects.all().delete()
     return redirect('home')
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        remember = request.POST.get('remember')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user:
+            login(request, user)
+
+            if not remember:
+                request.session.set_expiry(0)  # logout when browser closes
+
+            return redirect('home')
+        else:
+            messages.error(request, "Invalid credentials")
+
+    return render(request, 'login.html')
+
+
+def signup_view(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+        if password1 == password2:
+            if User.objects.filter(username=username).exists():
+                messages.error(request, "Username already exists")
+            else:
+                user = User.objects.create_user(username=username, password=password1)
+                login(request, user)
+                return redirect('home')
+        else:
+            messages.error(request, "Passwords do not match")
+
+    return render(request, 'signup.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')

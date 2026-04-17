@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - SpendWise</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <h1>Welcome <em>Back</em></h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+
+            <!-- Remember Me -->
+            <div class="options">
+                <label>
+                    <input type="checkbox" name="remember"> Remember Me
+                </label>
+                <a href="{% url 'password_reset' %}">Forgot Password?</a>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+    </div>
+</div>
+
+</body>
+</html>
