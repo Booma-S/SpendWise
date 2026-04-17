@@ -1,0 +1,116 @@
+<div id="app-loader">
+<div class="glow-orb"></div>
+ 
+<!-- particles -->
+<div class="particles" id="particles"></div>
+ 
+<!-- corner ornaments -->
+<svg class="corner corner--tl" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 38 L2 2 L38 2" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-linecap="round"/>
+  <circle cx="2" cy="2" r="1.5" fill="rgba(201,168,76,0.5)"/>
+</svg>
+<svg class="corner corner--tr" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 38 L2 2 L38 2" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-linecap="round"/>
+  <circle cx="2" cy="2" r="1.5" fill="rgba(201,168,76,0.5)"/>
+</svg>
+<svg class="corner corner--bl" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 38 L2 2 L38 2" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-linecap="round"/>
+  <circle cx="2" cy="2" r="1.5" fill="rgba(201,168,76,0.5)"/>
+</svg>
+<svg class="corner corner--br" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 38 L2 2 L38 2" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-linecap="round"/>
+  <circle cx="2" cy="2" r="1.5" fill="rgba(201,168,76,0.5)"/>
+</svg>
+ 
+<!-- brand top-left -->
+<div class="brand">
+  <div class="brand-dot"></div>
+  <span class="brand-label">Finance Tracker</span>
+</div>
+ 
+<!-- main loader -->
+<div class="loader">
+ 
+  <!-- ring assembly -->
+  <div class="ring-assembly">
+    <svg class="ring-svg" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+ 
+      <!-- outer dashed track -->
+      <circle cx="110" cy="110" r="90" class="track-outer" stroke-dasharray="4 8"/>
+ 
+      <!-- tick marks at 30° intervals -->
+      <g stroke="rgba(201,168,76,0.25)" stroke-width="1" stroke-linecap="round">
+        <line x1="110" y1="22" x2="110" y2="30"/>
+        <line x1="155" y1="32.6" x2="151" y2="39.5"/>
+        <line x1="187.4" y1="65" x2="180.5" y2="69"/>
+        <line x1="198" y1="110" x2="190" y2="110"/>
+        <line x1="187.4" y1="155" x2="180.5" y2="151"/>
+        <line x1="155" y1="187.4" x2="151" y2="180.5"/>
+        <line x1="110" y1="198" x2="110" y2="190"/>
+        <line x1="65" y1="187.4" x2="69" y2="180.5"/>
+        <line x1="32.6" y1="155" x2="39.5" y2="151"/>
+        <line x1="22" y1="110" x2="30" y2="110"/>
+        <line x1="32.6" y1="65" x2="39.5" y2="69"/>
+        <line x1="65" y1="32.6" x2="69" y2="39.5"/>
+      </g>
+ 
+      <!-- animated gold arc (outer) -->
+      <circle cx="110" cy="110" r="90"
+        class="arc-gold"
+        transform="rotate(-90 110 110)"/>
+ 
+      <!-- inner track -->
+      <circle cx="110" cy="110" r="70" class="track-inner" stroke-dasharray="2 6"/>
+ 
+      <!-- animated purple arc (inner) -->
+      <circle cx="110" cy="110" r="70"
+        class="arc-purple"
+        transform="rotate(-90 110 110)"/>
+ 
+      <!-- center circle bg -->
+      <circle cx="110" cy="110" r="48" fill="rgba(20,20,24,0.9)" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+ 
+    </svg>
+ 
+    <!-- rupee in center -->
+    <div class="center-icon">
+      <span class="rupee-symbol">₹</span>
+    </div>
+  </div>
+ 
+  <!-- title -->
+  <div class="title-block">
+    <p class="title-eyebrow">Finance Tracker</p>
+    <h1 class="title-main">Expense <em>Dashboard</em></h1>
+  </div>
+ 
+  <!-- status messages -->
+  <div class="status-area" id="statusArea">
+    <span class="status-msg active" id="msg0">Connecting to server ...</span>
+    <span class="status-msg" id="msg1">Loading your expenses ...</span>
+    <span class="status-msg" id="msg2">Computing analytics ...</span>
+    <span class="status-msg" id="msg3">Building your overview ...</span>
+    <span class="status-msg" id="msg4">Almost ready ...</span>
+  </div>
+ 
+  <!-- progress -->
+  <div class="progress-wrap">
+    <div class="progress-labels">
+      <span class="progress-label">Initializing</span>
+      <span class="progress-pct" id="pctLabel">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+ 
+</div>
+ 
+<!-- bottom chips -->
+<div class="data-chips">
+  <span class="chip">Expenses</span>
+  <span class="chip">Analytics</span>
+  <span class="chip">Reports</span>
+</div>
+
+</div>

@@ -1,0 +1,336 @@
+#app-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #0d0d0f;
+    overflow: hidden;
+}
+:root {
+    --gold: #c9a84c;
+    --gold-dim: #8a6f2e;
+    --gold-bright: #e8c76a;
+    --purple: #6b5ba4;
+    --bg: #0d0d0f;
+    --bg2: #141418;
+    --bg3: #1a1a20;
+    --text: #e8e0d0;
+    --text-dim: #8a8070;
+  }
+ 
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    font-family: 'DM Mono', monospace;
+  }
+ 
+  /* ── dot grid background ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(circle, rgba(201,168,76,0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 0;
+  }
+ 
+  /* ── ambient glow behind logo ── */
+  .glow-orb {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, rgba(107,91,164,0.04) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+ 
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -60%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -60%) scale(1.08); }
+  }
+ 
+  /* ── main container ── */
+  .loader {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 10;
+    gap: 0;
+  }
+ 
+  /* ── brand header ── */
+  .brand {
+    position: fixed; top: 32px; left: 40px;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0;
+    animation: fade-in 0.8s ease 0.2s forwards;
+  }
+  .brand-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .brand-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; font-weight: 300;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+ 
+  /* ── rupee ring assembly ── */
+  .ring-assembly {
+    position: relative;
+    width: 220px; height: 220px;
+    margin-bottom: 52px;
+  }
+ 
+  .ring-svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+ 
+  /* outer track */
+  .track-outer {
+    fill: none;
+    stroke: rgba(201,168,76,0.08);
+    stroke-width: 2;
+  }
+ 
+  /* animated gold arc */
+  .arc-gold {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-dasharray: 565;
+    stroke-dashoffset: 565;
+    animation: draw-arc 2.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+  }
+ 
+  /* animated purple arc (inner) */
+  .arc-purple {
+    fill: none;
+    stroke: var(--purple);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-dasharray: 439;
+    stroke-dashoffset: 439;
+    animation: draw-arc-purple 2.2s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards;
+  }
+ 
+  /* inner ring subtle */
+  .track-inner {
+    fill: none;
+    stroke: rgba(107,91,164,0.08);
+    stroke-width: 1;
+  }
+ 
+  @keyframes draw-arc {
+    0% { stroke-dashoffset: 565; }
+    100% { stroke-dashoffset: 80; }
+  }
+  @keyframes draw-arc-purple {
+    0% { stroke-dashoffset: 439; }
+    100% { stroke-dashoffset: 160; }
+  }
+ 
+  /* tick marks on outer ring */
+  .tick {
+    stroke: rgba(201,168,76,0.2);
+    stroke-width: 1;
+  }
+ 
+  /* ── center rupee symbol ── */
+  .center-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+ 
+  .rupee-symbol {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 58px; font-weight: 400;
+    color: transparent;
+    background: linear-gradient(135deg, var(--gold-dim) 0%, var(--gold-bright) 50%, var(--gold-dim) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    line-height: 1;
+    opacity: 0;
+    animation: rupee-appear 0.6s ease 1.2s forwards;
+    display: block;
+    letter-spacing: -2px;
+  }
+ 
+  @keyframes rupee-appear {
+    0% { opacity: 0; transform: scale(0.8); }
+    60% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+ 
+  /* ── title block ── */
+  .title-block {
+    text-align: center;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: slide-up 0.7s ease 1.5s forwards;
+  }
+ 
+  .title-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; font-weight: 300;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 8px;
+  }
+ 
+  .title-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 400;
+    color: var(--text);
+    line-height: 1.1;
+  }
+ 
+  .title-main em {
+    font-style: italic;
+    color: var(--gold);
+  }
+ 
+  @keyframes slide-up {
+    0% { opacity: 0; transform: translateY(14px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+ 
+  /* ── status messages ── */
+  .status-area {
+    width: 340px;
+    text-align: center;
+    margin-bottom: 32px;
+    height: 20px;
+    position: relative;
+  }
+ 
+  .status-msg {
+    position: absolute;
+    width: 100%; left: 0;
+    font-size: 11px; font-weight: 300;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .status-msg.active { opacity: 1; }
+ 
+  /* ── progress bar ── */
+  .progress-wrap {
+    width: 260px;
+    opacity: 0;
+    animation: fade-in 0.6s ease 2s forwards;
+  }
+ 
+  .progress-labels {
+    display: flex; justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .progress-label {
+    font-size: 10px; font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+  }
+  .progress-pct {
+    font-size: 10px; font-weight: 400;
+    color: var(--gold);
+    transition: opacity 0.3s;
+  }
+ 
+  .progress-track {
+    width: 100%; height: 1px;
+    background: rgba(201,168,76,0.12);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+ 
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
+    border-radius: 1px;
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+ 
+  /* shimmer on fill */
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 40px; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+ 
+  @keyframes shimmer {
+    0% { transform: translateX(-40px); }
+    100% { transform: translateX(40px); }
+  }
+ 
+  /* ── floating particles ── */
+  .particles {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    overflow: hidden;
+  }
+ 
+  .particle {
+    position: absolute;
+    bottom: -10px;
+    width: 2px; height: 2px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0;
+    animation: float-up linear infinite;
+  }
+ 
+  @keyframes float-up {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    10% { opacity: 0.6; }
+    80% { opacity: 0.15; }
+    100% { opacity: 0; transform: translateY(-100vh) scale(0.3); }
+  }
+ 
+  /* ── corner ornaments ── */
+  .corner {
+    position: fixed;
+    width: 40px; height: 40px;
+    opacity: 0;
+    animation: fade-in 1s ease 0.8s forwards;
+  }
+  .corner--tl { top: 24px; left: 24px; }
+  .corner--tr { top: 24px; right: 24px; transform: scaleX(-1); }
+  .corner--bl { bottom: 24px; left: 24px; transform: scaleY(-1); }
+  .corner--br { bottom: 24px; right: 24px; transform: scale(-1, -1); }
+ 
+  /* ── data chips (decorative) ── */
+  .data-chips {
+    position: fixed; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 16px;
+    opacity: 0;
+    animation: fade-in 0.7s ease 2.5s forwards;
+  }
+ 
+  .chip {
+    padding: 5px 12px;
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 20px;
+    font-size: 10px; font-weight: 300;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim);
+    background: rgba(201,168,76,0.04);
+  }
+ 
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }

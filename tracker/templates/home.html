@@ -19,6 +19,10 @@
 
     <link rel="apple-touch-icon" href="{% static 'images/icon.jpg' %}">
     <link rel="icon" href="{% static 'images/icon.jpg' %}">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
+    
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -550,9 +554,12 @@
 </head>
 <body>
 
+{% include 'components/loader.html' %}
+
 <div class="bg-atmosphere"></div>
 <div class="bg-grid"></div>
 
+<div id="main-content" style="display:none">
 <div class="shell">
 
     <!-- TOP NAV -->
@@ -806,6 +813,7 @@
 </div>
 
 </div><!-- /shell -->
+</div>
 
 
 <script>
@@ -1078,6 +1086,17 @@ clearBtn.addEventListener('click', function() {
 
 // Run on load in case of pre-filled search
 filterList();
+</script>
+
+<script src="{% static 'js/loader.js' %}"></script>
+
+<script>
+window.addEventListener("load", function () {
+    setTimeout(() => {
+        document.getElementById("app-loader").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+    }, 1800);
+});
 </script>
 
 </body>
