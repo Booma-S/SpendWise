@@ -23,7 +23,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/loader.css' %}">
     
-    <style>
+<style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
@@ -49,7 +49,7 @@
             --radius-lg:  22px;
         }
 
-        html { scroll-behavior: smooth; overflow-x: hidden;}
+        html { scroll-behavior: smooth; }
 
         body {
             min-height: 100vh;
@@ -59,7 +59,6 @@
             padding: 0;
             position: relative;
             overflow-x: hidden;
-            line-height: 1.5;
         }
 
         .bg-atmosphere {
@@ -79,33 +78,27 @@
 
         /* ── SHELL ── */
         .shell {
-            position: relative; 
-            z-index: 1;
-            width: 100%;
-            max-width: 1100px; margin: 0 auto;
-            padding: 2rem 1.2rem 4rem;
+            position: relative; z-index: 1;
+            max-width: 1080px; margin: 0 auto;
+            padding: 3rem 2rem 5rem;
         }
 
         /* ── TOP NAV ── */
         .topnav {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 2rem;          
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 3rem;
+            animation: rise 0.6s 0.05s both;
         }
-        .nav-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap; 
-        }
-        .brand { display: flex; flex-direction: column; z-index: 2;}
+        .brand { display: flex; flex-direction: column; }
         .brand-eyebrow {
             font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
             color: var(--gold); display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
         }
         .brand-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--gold); opacity: 0.6; }
-        .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; line-height: 1.2;}
+        .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; }
         .brand-name em { font-style: italic; color: var(--gold); }
+
+        .nav-actions { display: flex; gap: 10px; align-items: center; }
 
         .btn-add {
             display: inline-flex; align-items: center; gap: 8px;
@@ -138,13 +131,13 @@
 
         /* ── SEARCH / FILTER BAR ── */
         .search-section {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             animation: rise 0.6s 0.08s both;
         }
         .search-bar {
             display: flex; align-items: center; gap: 14px;
             background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 0.9rem 1.2rem;
+            border-radius: var(--radius-lg); padding: 0.75rem 1.4rem;
             margin-bottom: 0.75rem;
             transition: border-color 0.25s;
         }
@@ -179,7 +172,7 @@
         .stat-row {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 1.2rem; margin-bottom: 2rem;
+            gap: 1rem; margin-bottom: 1.5rem;
             animation: rise 0.6s 0.1s both;
         }
         .stat-card {
@@ -224,8 +217,8 @@
 
         /* ── MAIN GRID ── */
         .main-grid {
-            display: grid; grid-template-columns: 1fr 300px;
-            gap: 1.2rem; margin-bottom: 1.5rem;
+            display: grid; grid-template-columns: 1fr 320px;
+            gap: 1rem; margin-bottom: 1rem;
             animation: rise 0.6s 0.2s both;
         }
 
@@ -498,25 +491,9 @@
             .stat-row { grid-template-columns: 1fr 1fr; }
             .stat-row .hero { grid-column: 1 / -1; }
         }
-        @media (min-width: 768px) {
-            .topnav {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .nav-actions {
-                flex-wrap: nowrap;
-            }
-
-            .btn-add,
-            .btn-export {
-                flex: unset;
-            }
-        }
-        @media (max-width: 768px) {
-            .stat-row {grid-template-columns: 1fr 1fr;}
-            .stat-row .hero { grid-column: 1 / -1; }
+        @media (max-width: 780px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .shell     { padding: 1.5rem 1rem 4rem; }
         }
         @media (max-width: 560px) {
             .stat-row   { grid-template-columns: 1fr 1fr; }
@@ -525,23 +502,6 @@
             .nav-actions { width: 100%; }
             .btn-add    { flex: 1; justify-content: center; }
             .btn-export { flex: 1; justify-content: center; }
-            .nav-actions {width: 100%;}
-        }
-        @media (max-width: 600px) {
-            .topnav {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .nav-actions {
-                width: 100%;
-            }
-
-            .btn-add,
-            .btn-export {
-                flex: 1;
-                justify-content: center;
-            }
         }
         @media (max-width: 400px) {
             .stat-row { grid-template-columns: 1fr; }
@@ -591,6 +551,7 @@
             justify-content: flex-end;  
         }
     </style>
+
 </head>
 <body>
 
