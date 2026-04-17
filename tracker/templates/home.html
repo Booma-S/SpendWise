@@ -89,19 +89,16 @@
         /* ── TOP NAV ── */
         .topnav {
             display: flex;
-            align-items: flex-start;   
-            justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;           
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 2rem;          
         }
         .nav-actions {
             display: flex;
             gap: 10px;
-            align-items: center;
             flex-wrap: wrap; 
         }
-        .brand { display: flex; flex-direction: column; min-width: 220px;}
+        .brand { display: flex; flex-direction: column; z-index: 2;}
         .brand-eyebrow {
             font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
             color: var(--gold); display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
@@ -501,10 +498,21 @@
             .stat-row { grid-template-columns: 1fr 1fr; }
             .stat-row .hero { grid-column: 1 / -1; }
         }
-        @media (max-width: 780px) {
-            .main-grid { grid-template-columns: 1fr; }
-            .shell     { padding: 1.5rem 1rem 4rem; }
+        @media (min-width: 768px) {
+            .topnav {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
 
+            .nav-actions {
+                flex-wrap: nowrap;
+            }
+
+            .btn-add,
+            .btn-export {
+                flex: unset;
+            }
         }
         @media (max-width: 768px) {
             .stat-row {grid-template-columns: 1fr 1fr;}
