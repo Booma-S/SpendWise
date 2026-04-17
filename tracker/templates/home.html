@@ -23,7 +23,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/loader.css' %}">
     
-<style>
+ <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
@@ -85,12 +85,11 @@
 
         /* ── TOP NAV ── */
         .topnav {
-            display: flex;
-            flex-direction: column;   
-            align-items: flex-start;  
-            gap: 10px;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 3rem;
+            animation: rise 0.6s 0.05s both;
         }
-        .brand { display: flex; flex-direction: column; align-items: flex-end;}
+        .brand { display: flex; flex-direction: column; }
         .brand-eyebrow {
             font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
             color: var(--gold); display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
@@ -99,7 +98,7 @@
         .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; }
         .brand-name em { font-style: italic; color: var(--gold); }
 
-        .nav-actions { display: flex; gap: 10px; align-items:center; margin-top: 4px;  }
+        .nav-actions { display: flex; gap: 10px; align-items: center; }
 
         .btn-add {
             display: inline-flex; align-items: center; gap: 8px;
@@ -553,13 +552,14 @@
         }
     </style>
 
+
 </head>
 <body>
 
-{% include 'components/loader.html' %}
 
 <div class="bg-atmosphere"></div>
 <div class="bg-grid"></div>
+{% include 'components/loader.html' %}
 
 <div class="shell">
 
