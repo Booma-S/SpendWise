@@ -29,8 +29,8 @@ It provides a secure and intuitive platform for tracking expenses with a focus o
 ### Dashboard
 
 <p align="center">
-  <img src="screenshots/dashboard1.png" width="300"/>
-  <img src="screenshots/dashboard2.png" width="300"/>
+  <img src="screenshots/dashboard1.png" width="600"/>
+  <img src="screenshots/dashboard2.png" width="600"/>
 </p>
 
 ---
