@@ -28,17 +28,18 @@ It provides a secure and intuitive platform for tracking expenses with a focus o
 
 ### Dashboard
 
-![Dashboard1](screenshots/dashboard1.png)
-
-
-
-![Dashboard2](screenshots/dashboard2.png)
+<p align="center">
+  <img src="screenshots/dashboard1.png" width="300"/>
+  <img src="screenshots/dashboard2.png" width="300"/>
+</p>
 
 ---
 
 ### ➕ Add Expense
 
-![Add Expense](screenshots/add-expense.png)
+<p align="center">
+  <img src="screenshots/add-expense.png" width="400"/>
+</p>
 
 ---
 
