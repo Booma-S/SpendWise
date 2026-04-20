@@ -150,13 +150,13 @@
     </div>
 
     <div class="form-card">
-        <form method="POST">
+        <form method="POST" autocomplete="off">
             {% csrf_token %}
 
             <!-- Title -->
             <div class="field">
                 <label for="title">Title</label>
-                <input type="text" id="title" name="title" placeholder="e.g. Dinner with friends, Uber to airport…">
+                <input type="text" id="title" name="title" placeholder="e.g. Dinner with friends, Uber to airport…" autocomplete="off">
             </div>
 
             <!-- Amount -->
@@ -164,14 +164,14 @@
                 <label for="amount">Amount</label>
                 <div class="input-wrap">
                     <span class="currency">₹</span>
-                    <input type="number" id="amount" name="amount" placeholder="0.00" step="0.01" min="0" required>
+                    <input type="number" id="amount" name="amount" placeholder="0.00" step="0.01" min="0" required autocomplete="off">
                 </div>
             </div>
 
             <!-- Category -->
             <div class="field">
                 <label for="category">Category</label>
-                <input type="text" id="category" name="category" placeholder="e.g. Travel, Food, Bills…" required>
+                <input type="text" id="category" name="category" placeholder="e.g. Travel, Food, Bills…" required autocomplete="off">
                 <div class="category-chips" id="chips">
                     <span class="chip" onclick="selectChip(this,'Food')">Food</span>
                     <span class="chip" onclick="selectChip(this,'Travel')">Travel</span>
@@ -186,18 +186,18 @@
             <div class="field-row">
                 <div class="field">
                     <label for="date">Date</label>
-                    <input type="date" id="date" name="date" required>
+                    <input type="date" id="date" name="date" required autocomplete="off">
                 </div>
                 <div class="field">
                     <label for="ref">Reference (optional)</label>
-                    <input type="text" id="ref" name="reference" placeholder="Invoice #, receipt…">
+                    <input type="text" id="ref" name="reference" placeholder="Invoice #, receipt…" autocomplete="off">
                 </div>
             </div>
 
             <!-- Description -->
             <div class="field desc-field">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" placeholder="Add a note about this expense…"></textarea>
+                <textarea id="description" name="description" placeholder="Add a note about this expense…" autocomplete="off"></textarea>
             </div>
 
             <div class="divider"></div>

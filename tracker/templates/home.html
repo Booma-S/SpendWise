@@ -565,6 +565,28 @@
         @media (max-width: 400px) {
             .stat-row { grid-template-columns: 1fr; }
         }
+
+        /* DESKTOP ONLY */
+        @media (min-width: 1024px) {
+
+            .heatmap-grid {
+                grid-template-columns: repeat(12,1fr);
+                gap: 0px;
+                display: grid;
+                column-gap: 2px;
+                row-gap: 5px;
+            }
+            .heatmap-panel {
+                max-width: 100%;
+                margin: 5 auto;
+            }
+            .heatmap-cell {
+                width: 40px;
+                height: 25px;
+                border-radius: 4px;
+            }
+        }
+
         button, .btn-add, .action-btn { min-height: 44px; }
 
         .hero {

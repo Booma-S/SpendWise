@@ -12,12 +12,12 @@
     <div class="auth-card">
         <h1>Create <em>Account</em></h1>
 
-        <form method="POST">
+        <form method="POST" autocomplete="off">
             {% csrf_token %}
 
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password1" placeholder="Password" required>
-            <input type="password" name="password2" placeholder="Confirm Password" required>
+            <input type="text" name="username" placeholder="Username" required autocomplete="off">
+            <input type="password" name="password1" placeholder="Password" required autocomplete="off">
+            <input type="password" name="password2" placeholder="Confirm Password" required autocomplete="off">
 
             <button type="submit">Sign Up</button>
         </form>

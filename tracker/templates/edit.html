@@ -176,7 +176,7 @@
     </div>
 
     <div class="form-card">
-        <form method="POST" id="editForm">
+        <form method="POST" id="editForm" autocomplete="off">
             {% csrf_token %}
 
             <!-- Title -->
@@ -186,7 +186,7 @@
                     type="text" id="title" name="title"
                     value="{{ expense.title|default:'' }}"
                     placeholder="e.g. Dinner with friends…"
-                    data-original="{{ expense.title|default:'' }}"
+                    data-original="{{ expense.title|default:'' }}" autocomplete="off"
                 >
                 <span class="original-hint">Original: {{ expense.title|default:"(none)" }}</span>
             </div>
@@ -200,7 +200,7 @@
                         type="number" id="amount" name="amount"
                         value="{{ expense.amount }}"
                         step="0.01" min="0" required
-                        data-original="{{ expense.amount }}"
+                        data-original="{{ expense.amount }}" autocomplete="off"
                     >
                 </div>
                 <span class="original-hint">Original: ₹{{ expense.amount }}</span>
@@ -213,7 +213,7 @@
                     type="text" id="category" name="category"
                     value="{{ expense.category }}"
                     placeholder="e.g. Travel, Food, Bills…"
-                    required data-original="{{ expense.category }}"
+                    required data-original="{{ expense.category }}" autocomplete="off"
                 >
                 <div class="category-chips">
                     <span class="chip" onclick="selectChip(this,'Food')">Food</span>
@@ -232,20 +232,20 @@
                     <input
                         type="date" id="date" name="date"
                         value="{{ expense.date|date:'Y-m-d' }}"
-                        required data-original="{{ expense.date|date:'Y-m-d' }}"
+                        required data-original="{{ expense.date|date:'Y-m-d' }}" autocomplete="off"
                     >
                     <span class="original-hint">Original: {{ expense.date|date:'d M Y' }}</span>
                 </div>
                 <div class="field">
                     <label for="ref">Reference (optional)</label>
-                    <input type="text" id="ref" name="reference" value="{{ expense.reference|default:'' }}" placeholder="Invoice #, receipt…">
+                    <input type="text" id="ref" name="reference" value="{{ expense.reference|default:'' }}" placeholder="Invoice #, receipt…" autocomplete="off">
                 </div>
             </div>
 
             <!-- Description -->
             <div class="field desc-field">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" data-original="{{ expense.description|default:'' }}">{{ expense.description|default:'' }}</textarea>
+                <textarea id="description" name="description" data-original="{{ expense.description|default:'' }}" autocomplete="off">{{ expense.description|default:'' }}</textarea>
                 <span class="original-hint">Editing note — changes are unsaved</span>
             </div>
 

@@ -20,16 +20,16 @@
             {% endfor %}
         </div>
         {% endif %}
-        <form method="POST">
+        <form method="POST" autocomplete="off">
             {% csrf_token %}
 
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
+            <input type="text" name="username" placeholder="Username" required autocomplete="off">
+            <input type="password" name="password" placeholder="Password" required autocomplete="off">
 
             <!-- Remember Me -->
             <div class="options">
                 <label>
-                    <input type="checkbox" name="remember"> Remember Me
+                    <input type="checkbox" name="remember" autocomplete="off"> Remember Me
                 </label>
                 <a href="{% url 'password_reset' %}">Forgot Password?</a>
             </div>
