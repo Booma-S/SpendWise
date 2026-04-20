@@ -115,7 +115,6 @@ python manage.py runserver
 
 * 📱 Flutter mobile application (in progress)
 * 🔗 REST API using Django REST Framework
-* 📈 Expense analytics & visual insights
 * 🔐 Token-based authentication (JWT)
 
 ---
