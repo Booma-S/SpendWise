@@ -1,6 +1,6 @@
-# 💰 SpendWise
+# 💰 FinTrack
 
-**SpendWise** is a full-stack expense tracking web application built using Django that helps users efficiently manage and monitor their daily spending.
+**FinTrack** is a full-stack expense tracking web application built using Django that helps users efficiently manage and monitor their daily spending.
 It provides a secure and intuitive platform for tracking expenses with a focus on simplicity and usability.
 
 ---
